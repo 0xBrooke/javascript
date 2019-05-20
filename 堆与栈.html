@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>堆与栈</title>
+    <style>
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>堆与栈</h3>
+    <!-- link -->
+    <ul>
+        <li>
+            <a href="https://www.cnblogs.com/heioray/p/9487093.html">博客园讲解</a>
+        </li>
+        <li>
+            <a href="https://blog.csdn.net/qq_38722097/article/details/80717240">CSDN 讲解(非常棒)</a>
+        </li>
+    </ul>
+    <h3>for循环的相关知识</h3>
+    <ul>    
+        <li>
+            <a href="https://blog.csdn.net/tivon_594/article/details/78740679">CSDN 讲解</a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/hongdiandian/p/9628583.html">博客园讲解 (good)</a>
+        </li>
+    </ul>
+    <h3> ==  === 的区别详解</h3>
+    <ul>
+        <li><a href="https://blog.csdn.net/magic_xiang/article/details/83686224">CSDN</a></li>
+    </ul>
+</body>
+<!-- 堆与栈 -->
+
+<script>
+    var a = new String("123");
+    var b = String("123");
+    var c = "124";
+    console.log(a == b, a === b);
+    var d = new String("123");
+    console.log(a == d);
+
+    // console.log(null instanceof Object)
+    var person = function () {
+
+    }
+    var p = new person();
+    console.log(p instanceof person)
+    function Foo() {
+
+    }
+    console.log(typeof Foo);
+
+    // instanceof 的原型
+
+    let num = 134
+    function instance_of(L, R) {
+        var O = R.prototype; // 取R的显示原型
+        L = L.__proto__;    // 取L的隐示原型 
+        while (true) { // 一直循环的意思
+            if (L === null) {
+                return "不是"
+            }
+            if (L === O) {
+                return "是"
+            }
+            L = L.__proto__; // 继续向上一层查找
+        }
+    }
+    console.log(instance_of(c, Number));
+
+
+    // for
+    let str = 'r4w';
+    let arr  =[2,"d",33];
+    for(var i=0;i<str.length; i++){
+        console.log("of",str[i])
+    }
+    // 
+    for(k in str){
+        console.log(str[k]);
+    }
+
+    arr.forEach((item,index,items)=>{
+        // 参数分别代表的是 每一项，索引值，自身
+        console.log(item,index,items);
+    })
+    let arrMap = arr.map((item,index,items)=>{
+        return item+"M"
+    })
+    console.log(arrMap);
+
+    for(let k of str){
+        console.log("of",k)
+    }
+
+    arr.foo = 1000;
+    console.log(arr);
+
+    let person1 = {age:20};
+    let person2 = person1;
+    person2.age = 23;
+    console.log(person1.age)
+    console.log(person2 === person1)
+</script>
+
+</html>
