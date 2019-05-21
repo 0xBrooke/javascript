@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>初始化页面</title>
+</head>
+
+<body>
+    <div>
+        call的详解
+    </div>
+    <ul>
+        <li><a href="https://www.jianshu.com/p/80ea0d1c04f8">简书中的详解</a></li>
+    </ul>
+</body>
+<script>
+    var name = "xia";
+    var age = 28;
+    var obj = {
+        name: 'kk',
+        address: "hebei",
+        age: this.age,
+        myFun: function () {
+            console.log(this.name + "的年龄" + this.age);
+        }
+    }
+    var objNew = {
+        name: "wen",
+        age: 30
+    }
+    var objNew1 = {
+        name: "eee",
+        age: 34
+    }
+    console.log(obj.myFun())
+    console.log(obj.myFun.call())
+    console.log(obj.myFun.call(objNew))
+    console.log(obj.myFun.bind(objNew1)())
+
+
+    function sayThis() {
+        console.log(this);
+    }
+    sayThis.call('a');
+
+    function mul(a,b){
+        console.log("this的指向",this);
+        return a*b
+    }
+    console.log(mul(2,3))
+    console.log(mul.call(null,2,3))
+    console.log(mul.call('aa',2,3))
+    console.log(mul.call(37,2,3))
+    console.log(mul.call('',2,3))
+</script>
+
+</html>
