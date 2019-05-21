@@ -6,7 +6,7 @@
     <meta name="viewport"
         content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>堆与栈</title>
+    <title>堆与栈、for循环之间的对比</title>
     <style>
         li {
             margin-bottom: 10px;
@@ -21,12 +21,15 @@
         <li>
             <a href="https://www.cnblogs.com/heioray/p/9487093.html">博客园讲解</a>
         </li>
+    </ul>
+    <h3>instanceOf的实现原理</h3>
+    <ul>
         <li>
             <a href="https://blog.csdn.net/qq_38722097/article/details/80717240">CSDN 讲解(非常棒)</a>
         </li>
     </ul>
     <h3>for循环的相关知识</h3>
-    <ul>    
+    <ul>
         <li>
             <a href="https://blog.csdn.net/tivon_594/article/details/78740679">CSDN 讲解</a>
         </li>
@@ -34,7 +37,7 @@
             <a href="https://www.cnblogs.com/hongdiandian/p/9628583.html">博客园讲解 (good)</a>
         </li>
     </ul>
-    <h3> ==  === 的区别详解</h3>
+    <h3> == === 的区别详解</h3>
     <ul>
         <li><a href="https://blog.csdn.net/magic_xiang/article/details/83686224">CSDN</a></li>
     </ul>
@@ -81,32 +84,32 @@
 
     // for
     let str = 'r4w';
-    let arr  =[2,"d",33];
-    for(var i=0;i<str.length; i++){
-        console.log("of",str[i])
+    let arr = [2, "d", 33];
+    for (var i = 0; i < str.length; i++) {
+        console.log("of", str[i])
     }
     // 
-    for(k in str){
+    for (k in str) {
         console.log(str[k]);
     }
 
-    arr.forEach((item,index,items)=>{
+    arr.forEach((item, index, items) => {
         // 参数分别代表的是 每一项，索引值，自身
-        console.log(item,index,items);
+        console.log(item, index, items);
     })
-    let arrMap = arr.map((item,index,items)=>{
-        return item+"M"
+    let arrMap = arr.map((item, index, items) => {
+        return item + "M"
     })
     console.log(arrMap);
 
-    for(let k of str){
-        console.log("of",k)
+    for (let k of str) {
+        console.log("of", k)
     }
 
     arr.foo = 1000;
     console.log(arr);
 
-    let person1 = {age:20};
+    let person1 = { age: 20 };
     let person2 = person1;
     person2.age = 23;
     console.log(person1.age)
