@@ -15,8 +15,6 @@
     <ul>
         <li><a href="https://www.jianshu.com/p/80ea0d1c04f8">简书中的详解</a></li>
     </ul>
-
-    <button id='isThis'>判断DOM的this指向</button>
 </body>
 <script>
     var name = "xia";
@@ -59,14 +57,6 @@
     console.log(mul.call('',2,3));
 
 
-    // 
-
-    function isThis(e){
-        console.log(this === e.currentTarget)
-        this.style= "color:red"; 
-    }
-    var element = document.getElementById("isThis");
-    element.addEventListener("click",isThis,false)
 </script>
 
 </html>

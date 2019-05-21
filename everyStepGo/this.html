@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>如何正确判断this的指向</title>
+    <style>
+        *{margin: 0;padding:5px;}
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <a href="https://www.cnblogs.com/dongcanliang/p/7054176.html">参考文章</a>
+        <ul>
+            <li>
+                在不是箭头函数的情况下，this指向是调用其所在函数的对象，而且是离谁进就指向谁。
+                <span>（对于常规的对象，原型链，getter，setter都适用）</span>
+            </li>
+            <li>
+                构造函数下，this与被创建的新对象绑定
+            </li>
+            <li>
+                DOM事件，this指向的是触发事件的元素，
+                <b>有两种情况</b>
+            </li>
+            <li>
+                bing()，call(),apply(),中this指向的是第一个参数
+                <b>注：如果第一个参数不是对象，JavaScript内部会尝试将其转换成对象然后指向它。</b>
+            </li>
+            <li>
+                setTimeout & setInterval 中，this指向window，
+                但是可以通过bind(),方法来改变this的指向
+            </li>
+            <li>
+                <b>箭头函数中：</b>
+                由于箭头函数不绑定this， 它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值
+                <ol>
+                    <li><b>即，this是在哪个环境下创建出来的，就指向哪里，如果是在全局环境中创建的就指向window，</b></li>
+                    <li> <b>如果是在对象中创建的就指向创建时的哪个对象，不管他在哪里执行的</b></li>
+                </ol>
+            </li>
+        </ul>
+        <h4>具体分析</h4>
+        <p>
+            在全局环境下：无论是严格模式还是非严格模式，this始终指向的是window，
+            但是，在严格模式下为 undefind
+        </p>
+
+        <button onclick="console.log(this)">判断DOM事件1</button>
+        <button onclick="(function(){console.log(this)})()">判断DOM事件2</button>
+        <button id='isThis'>判断DOM的事件3</button>
+        <button id='isThis4'>判断DOM的事件4</button>
+    </div>
+
+</body>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script>
+    function f2() {
+        "use strict"; // 这里是严格模式
+        return this;
+    }
+    console.log(f2() === window)
+    console.log(f2() === undefined) // 即：在严格模式下普通函数指向的是window
+
+    function isThis() {
+        console.log(this)
+    }
+
+    // DOM 操作中
+    function isThis(e) {
+        console.log(this === e.currentTarget)
+        this.style = "color:red";
+    }
+    var element = document.getElementById("isThis");
+    element.addEventListener("click", isThis, false);
+
+    $(function () {
+        $("#isThis4").click(function (e) {
+            console.log(this === e.currentTarget)
+            console.log(this)
+        })
+    })
+
+    // 好例子 隐示绑定 在对象中
+    var person = {
+        name: "xia",
+        sayname: function () {
+            console.log(this.name);
+            return this.name
+        }
+    }
+    var s = person.sayname;
+    console.log(person.sayname())
+    console.log("s", s());
+</script>
+
+</html>
