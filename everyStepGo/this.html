@@ -7,12 +7,7 @@
         content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>如何正确判断this的指向</title>
-    <style>
-        *{margin: 0;padding:5px;}
-        li {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/common.css">
 </head>
 
 <body>
@@ -99,6 +94,30 @@
     var s = person.sayname;
     console.log(person.sayname())
     console.log("s", s());
+
+    // 练习
+    var number = 5;
+    var obj = {
+        number: 3,
+        fu: (function () {
+            var number;
+            this.number *= 2; // win
+            number = number * 2;
+            number = 4;
+            return function () {
+                var num = this.number;
+                this.number *= 2;
+                console.log(num);
+                number *= 3;
+                console.log(number)
+            }
+        })()
+    }
+    var Fun = obj.fu;
+    Fun.call(null);
+    // 这块还涉及到一个闭包函数问题
+    obj.fu();
+
 </script>
 
 </html>
