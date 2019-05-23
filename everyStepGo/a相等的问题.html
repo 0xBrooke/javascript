@@ -15,9 +15,13 @@
             <li><a href="https://www.jianshu.com/p/acf797bdbe98">简书上的例子</a></li>
             <li><a href="http://www.fly63.com/article/detial/851?type=3">前端网详解</a></li>
             <li><a href="https://segmentfault.com/a/1190000007434923"> Object.defineProperty() 属性详解</a></li>
+            <li><a href="https://www.imooc.com/article/details/id/23107">valueOf 的详解</a></li>  
+            <li><a href="http://www.cnblogs.com/winyh/p/6668135.html">博客园</a></li>
         </ul>
     </div>
-
+    <h4>
+        个人观点：当对象进行类型转换时，先执行valueOf() 函数，如果没有则执行toString()函数进行类型转换；
+    </h4>
 </body>
 <script>
     // 如果是个对象
@@ -66,6 +70,15 @@
     } else {
         console.log("你不想让d相等吗？")
     }
+
+    var arr =[2,3,"f"];
+    arr.valueOf = function(){
+        console.log("valueOf")
+    }
+    arr.toString = function(){
+        console.log("toString")
+    }
+    console.log(arr==2)
 </script>
 
 </html>
