@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>初始化页面</title>
+    <title>a==1 a==2 a==3</title>
     <link rel="stylesheet" href="../css/common.css">
 </head>
 
@@ -43,7 +43,7 @@
     // 通过proxy 进行拦截操作
     var c = new Proxy({ i: 0 }, {
         get(target) {
-            return () => target.i+=1;
+            return () => target.i += 1;
         }
     })
 
@@ -59,6 +59,10 @@
     Object.defineProperty(window, "d", {
         get: function () {
             return this.value += 1
+        },
+        set: function (value) {
+            console.log(value)
+            d = value
         }
     })
     if (d == 1 && d == 2 && d == 3) {
@@ -66,6 +70,25 @@
     } else {
         console.log("你不想让d相等吗？")
     }
+
+    var obj = new Object();
+    obj.name = "xia";
+    var initValue = 'hello'
+    console.log(obj)
+    Object.defineProperty(obj, "age", {
+        // 获取值，还可以再次进行操作，
+        get: function () {
+            return initValue + "affa";
+        },
+        // get完以后要注意 return 回去，set再次进行赋值
+        set: function (value) {
+            initValue = value;
+        }
+    });
+    console.log(obj.age)
+    //get或set不是必须成对出现，任写其一就可以。如果不设置方法，
+
+    
 </script>
 
 </html>
