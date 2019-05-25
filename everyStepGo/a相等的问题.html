@@ -15,12 +15,27 @@
             <li><a href="https://www.jianshu.com/p/acf797bdbe98">简书上的例子</a></li>
             <li><a href="http://www.fly63.com/article/detial/851?type=3">前端网详解</a></li>
             <li><a href="https://segmentfault.com/a/1190000007434923"> Object.defineProperty() 属性详解</a></li>
-            <li><a href="https://www.imooc.com/article/details/id/23107">valueOf 的详解</a></li>  
+            <li><a href="https://www.imooc.com/article/details/id/23107">valueOf 的详解</a></li>
             <li><a href="http://www.cnblogs.com/winyh/p/6668135.html">博客园</a></li>
         </ul>
     </div>
+    <h3>对象的转换过程：</h3>
     <h4>
-        个人观点：当对象进行类型转换时，先执行valueOf() 函数，如果没有则执行toString()函数进行类型转换；
+        当一个对象object和数值做==比较的时候，会先把object转换为原始类型再进行比较。
+        所以，我们还需明白object到原始类型转换的一个过程：
+    </h4>
+    <ol class="col_r">
+        <li>如果部署了[Symbol.toPrimitive]接口，那么调用此接口，若返回的不是基本数据类型，抛出错误。</li>
+        <li> 如果没有部署[Symbol.toPrimitive]接口，
+            那么调用valueOf接口，若返回的不是基本数据类型，那么调用toString接口，若返回的还不是基本数据类型，那么抛出异常。
+        </li>
+        <li>
+            它们之间的一个的优先调用顺序是：[Symbol.toPrimitive] > valueOf > toString。
+        </li>
+    </ol>
+    <h3>数组的转换过程</h3>
+    <h4 class="col_r">
+        当一个数组Array和数值做==比较的时候，Array.prototype.toString()内部调用的是Array.prototype.join()，所以把join重写为shift，这样当比较a == 1时，相当于执行了
     </h4>
 </body>
 <script>
@@ -93,14 +108,14 @@
     //get或set不是必须成对出现，任写其一就可以。如果不设置方法，
 
 
-    var arr =[2,3,"f"];
-    arr.valueOf = function(){
+    var arr = [2, 3, "f"];
+    arr.valueOf = function () {
         console.log("valueOf")
     }
-    arr.toString = function(){
+    arr.toString = function () {
         console.log("toString")
     }
-    console.log(arr==2)
+    console.log(arr == 2)
 </script>
 
 </html>

@@ -14,26 +14,47 @@
 </head>
 
 <body>
+    <h4>
+        防抖函数概念作用:
+        函数防抖（debounce）是指在一定时间内，在动作被连续频繁触发的情况下，动作只会被执行一次，也就是说当调用动作过n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间，所以短时间内的连续动作永远只会触发一次，比如说用手指一直按住一个弹簧，它将不会弹起直到你松手为止。
+        目的:为了限制函数执行频率，优化函数触发频率过高导致的响应速度跟不上触发频率，出现延迟或者卡死的现象
+        防抖就是防止频繁的调用函数
+        应用场景：
+        1、window对象的resize,scroll事件。
+        2、拖拽的mousemove,mousedown事件。
+        3、文字输入，keyup、keydown事件。
+        4、表单验证
+    </h4>
     <div>
         <ul>
             <li>
                 <a href="https://segmentfault.com/a/1190000017227559">sf解释</a>
             </li>
+            <li>
+                <a href="https://www.jianshu.com/p/091c5fb96112">简书上的实例</a>
+            </li>
+            <li>
+                <a href="https://mp.weixin.qq.com/s/Vkshf-nEDwo2ODUJhxgzVA"></a>
+            </li>
+            <li>
+                <a href="https://www.cnblogs.com/momo798/p/9177767.html"></a>
+            </li>
         </ul>
     </div>
 
+    <p>
+        <input type="text" placeholder="请输入...." id='inputID'>
+    </p>
 </body>
+<script src="../js/jquery-1.11.3.min.js"></script>
 <script>
     //防抖
+    // 方法一
     function my_debounce(func, wait) {
-
         if (typeof func !== 'function') {
             throw new TypeError('need a function');
         }
-        wait = +wait || 0;
-
         let timeId = null;
-
         return function () {
             // console.log('滚动了滚动了');  // 测试时可放开
             const self = this;
@@ -50,12 +71,79 @@
         }
     }
     function onScroll_1() {
-        console.log('执行滚动处理函数啦');
+        console.log('执行滚动处理函数');
     }
     window.addEventListener('scroll', my_debounce(onScroll_1, 2000));
-    
-    // 
-    window.addEventListener("scroll", onScroll_1)
+
+    // 方法二
+    function debounce(func, wait) {
+        var timeout;
+        return function () {
+            var context = this;
+            var args = arguments;
+            if (timeout) {
+                clearTimeout(timeout)
+            }
+
+            timeout = setTimeout(function () {
+                func.apply(context, args);
+            }, wait)
+
+        }
+    }
+    function onScroll_2() {
+        console.log('监听窗口变化');
+    }
+    window.addEventListener('resize', debounce(onScroll_2, 1000));
+
+
+    // 场景三
+    $(window).on("scroll", function () {
+        // 这样虽然也能实现休息，但是影响性能  
+        var bodyHeight = $("html").height();
+        var scrollTop = $(window).scrollTop();
+        var windowHeigth = $(window).height();
+        var thresold = bodyHeight - scrollTop - windowHeigth;
+        console.log("scroll")
+        if (thresold > -100 && thresold <= 20) {
+            console.log("end")
+        }
+    })
+
+    function debounce3(fn, interval = 500) {
+        var timeout;
+        return function () {
+            if (timeout) {
+                clearTimeout(timeout)
+            };
+            timeout = setTimeout(function () {
+                console.log("sdf")
+                fn.apply(this, arguments)
+            }, interval)
+        }
+    }
+
+    $(window).on("scroll", debounce3(function () {
+        // 这样虽然也能实现休息，但是影响性能  
+        var bodyHeight = $("html").height();
+        var scrollTop = $(window).scrollTop();
+        var windowHeigth = $(window).height();
+        var thresold = bodyHeight - scrollTop - windowHeigth
+        if (thresold > -100 && thresold <= 20) {
+            console.log("debounce3  end")
+        }
+    })
+    )
+
+    // input 来监听input改变时间
+    $("#inputID").on("input",function(){
+        console.log("input变化")
+    })
+
+    $("#inputID").on("input",debounce3(function(){
+        console.log("debounce3 input变化")
+    })
+    )
 </script>
 
 </html>
