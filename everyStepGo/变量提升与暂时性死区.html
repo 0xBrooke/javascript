@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变量提升与暂时性死区</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="https://www.jianshu.com/p/d500c909194b">简书</a>
+        </li>
+    </ul>
+    <p class="col_r">
+        ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。
+    </p>
+    <div>
+        <h3>暂时性死区</h3>
+        <p>暂时性死区的本质就是，只要一进入当前作用域，所要使用的变量就已经存在了，但是不可获取不可使用，只有等到声明变量的那一行代码出现，才可以获取和使用该变量</p>
+        <p>在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”</p>
+    </div>
+</body>
+<script>
+    console.log(typeof a)
+    console.log(typeof b)
+    let b
+    var a;
+
+
+    // 重点看一下
+    var tmp = 123;
+    if (true) {
+        tmp = 'abc'; // ReferenceError
+        let tmp;
+    }
+</script>
+
+</html>

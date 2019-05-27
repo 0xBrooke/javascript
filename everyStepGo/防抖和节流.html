@@ -45,6 +45,7 @@
     <p>
         <input type="text" placeholder="请输入...." id='inputID'>
     </p>
+    
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script>
@@ -117,7 +118,6 @@
                 clearTimeout(timeout)
             };
             timeout = setTimeout(function () {
-                console.log("sdf")
                 fn.apply(this, arguments)
             }, interval)
         }
@@ -137,11 +137,11 @@
 
     // input 来监听input改变时间
     $("#inputID").on("input",function(){
-        console.log("input变化")
+        console.log("没有防抖")
     })
 
     $("#inputID").on("input",debounce3(function(){
-        console.log("debounce3 input变化")
+        console.log("防抖后")
     })
     )
 </script>

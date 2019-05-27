@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise的理解以及源码的实现</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="https://www.jianshu.com/p/82237a7ca6e5">简书的详解</a></li>
+        <li><a href="https://www.jianshu.com/p/fe5f173276bd">简书2</a></li>
+    </ul>
+
+    <div>
+        Promise传递的参数函数会立即执行，因此Promise使用的正确姿势是在其外层再包裹一层函数。
+    </div>
+
+</body>
+<script>
+    var promise = new Promise((resolve, reject) => {
+        var a = 1;
+        if (a == 1) {
+            resolve(a)
+        } else {
+            reject("error")
+        }
+    })
+
+    promise.then(function (val) {
+        console.log(val)
+        return ++val
+    }).catch(function (error) {
+        console.log(error)
+    }).then(function (val) {
+        console.log(val)
+    })
+
+    //第一个异步任务
+    function run_a() {
+        return new Promise(function (resolve, reject) {
+            //假设已经进行了异步操作，并且获得了数据
+            resolve("step1");
+        });
+    }
+    //第二个异步任务
+    function run_b(data_a) {
+        return new Promise(function (resolve, reject) {
+            //假设已经进行了异步操作，并且获得了数据
+            console.log(data_a);
+            resolve("step2");
+        });
+    }
+    //第三个异步任务
+    function run_c(data_b) {
+        return new Promise(function (resolve, reject) {
+            //假设已经进行了异步操作，并且获得了数据
+            console.log(data_b);
+            resolve("step3");
+        });
+    }
+
+    //连续调用
+    run_a().then(function (data) {
+        return run_b(data);
+    }).then(function (data) {
+        return run_c(data);
+    }).then(function (data) {
+        console.log(data);
+    });
+
+    Promise.all([run_a(),run_b(),run_c()]).then(function(data){
+        console.log("success",data);
+    })
+</script>
+
+</html>
