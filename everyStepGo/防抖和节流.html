@@ -8,7 +8,7 @@
     <title>防抖和节流</title>
     <style>
         html {
-            height: 200%;
+            height: 400%;
         }
     </style>
 </head>
@@ -20,11 +20,23 @@
         目的:为了限制函数执行频率，优化函数触发频率过高导致的响应速度跟不上触发频率，出现延迟或者卡死的现象
         防抖就是防止频繁的调用函数
         应用场景：
-        1、window对象的resize,scroll事件。
-        2、拖拽的mousemove,mousedown事件。
-        3、文字输入，keyup、keydown事件。
-        4、表单验证
+        <ul>
+            <li>window对象的resize,scroll事件</li>
+            <li>
+                给按钮加函数防抖防止表单多次提交
+            </li>
+            <li>表单验证</li>
+        </ul>
+
     </h4>
+    <h4>
+        应用场景
+    </h4>
+    <ul>
+        <li>DOM元素拖拽 mousemove,mousedown事件</li>
+        <li>游戏中的刷新率</li>
+        <li>Canvas画笔功能</li>
+    </ul>
     <div>
         <ul>
             <li>
@@ -45,12 +57,12 @@
     <p>
         <input type="text" placeholder="请输入...." id='inputID'>
     </p>
-    
+
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script>
     //防抖
-    // 方法一
+    // 滚动停止以后执行
     function my_debounce(func, wait) {
         if (typeof func !== 'function') {
             throw new TypeError('need a function');
@@ -72,7 +84,7 @@
         }
     }
     function onScroll_1() {
-        console.log('执行滚动处理函数');
+        console.log('防抖，滚动停止后执行');
     }
     window.addEventListener('scroll', my_debounce(onScroll_1, 2000));
 
@@ -97,53 +109,50 @@
     }
     window.addEventListener('resize', debounce(onScroll_2, 1000));
 
-
-    // 场景三
-    $(window).on("scroll", function () {
-        // 这样虽然也能实现休息，但是影响性能  
-        var bodyHeight = $("html").height();
-        var scrollTop = $(window).scrollTop();
-        var windowHeigth = $(window).height();
-        var thresold = bodyHeight - scrollTop - windowHeigth;
-        console.log("scroll")
-        if (thresold > -100 && thresold <= 20) {
-            console.log("end")
-        }
-    })
-
+    // 防抖三
     function debounce3(fn, interval = 500) {
         var timeout;
         return function () {
+            var context = this;
+            var args = arguments;
             if (timeout) {
                 clearTimeout(timeout)
             };
             timeout = setTimeout(function () {
-                fn.apply(this, arguments)
+                fn.apply(context, args)
             }, interval)
         }
     }
 
-    $(window).on("scroll", debounce3(function () {
-        // 这样虽然也能实现休息，但是影响性能  
-        var bodyHeight = $("html").height();
-        var scrollTop = $(window).scrollTop();
-        var windowHeigth = $(window).height();
-        var thresold = bodyHeight - scrollTop - windowHeigth
-        if (thresold > -100 && thresold <= 20) {
-            console.log("debounce3  end")
-        }
-    })
-    )
-
     // input 来监听input改变时间
-    $("#inputID").on("input",function(){
+    $("#inputID").on("input", function () {
         console.log("没有防抖")
     })
 
-    $("#inputID").on("input",debounce3(function(){
+    $("#inputID").on("input", debounce3(function () {
         console.log("防抖后")
     })
     )
+
+    // 节流  监听界面是否滚动到底部
+    function throttle(fn, delay = 500) {
+        var prev = Date.now();
+        return function () {
+            var context = this;
+            var args = arguments;
+            var now = Date.now();
+            if (now - prev >= delay) {
+                fn.apply(context, args);
+                prev = Date.now();
+            }
+        }
+    }
+    window.addEventListener("scroll", function () {
+        console.log("对比一下节流哦")
+    })
+    window.addEventListener("scroll", throttle(function () {
+        console.log("节流：滚动条是否滚动到页面底部")
+    }))
 </script>
 
 </html>
