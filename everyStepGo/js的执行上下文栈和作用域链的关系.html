@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>js执行上下文栈和作用域链的关系</title>
+</head>
+
+<body>
+   <ul>
+      <li>
+         <a href="https://www.jianshu.com/p/11d3c56cf98c"></a>
+      </li>
+   </ul>
+   <div>
+      <h4>js执行上下文</h4>
+      <p>执行上下文又称执行环境</p>
+      <h4>作用域链</h4>
+      <p>是在函数创建的时候就确定的</p>
+   </div>
+
+</body>
+<script>
+   function A(){
+      var name = "a"
+   }
+   var a = new A()
+   console.log(A.prototype)
+   console.log(A.prototype.constructor)
+   console.log(A.constructor)
+</script>   
+
+</html>

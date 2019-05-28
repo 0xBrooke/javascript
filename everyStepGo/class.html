@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6 中的class的关键字</title>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="https://www.jianshu.com/p/86267fab4878">简书</a>
+        </li>
+        <li>
+            <a href="https://www.jianshu.com/p/a7e5fcb8a67f">简书详细讲解了super</a>
+        </li>
+    </ul>
+    <div>
+
+    </div>
+
+</body>
+<script>
+    // es5 的写法
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    var obj = new Person("xia", 28);
+
+    Person.prototype.say = function () {
+        console.log(this.name + this.age);
+    }
+    obj.say();
+    // es6
+    class PersonA {
+        constructor(name, age) {
+            this.name = name?name:"我没有名字";
+            this.age = age?age:"我没有年龄"
+        }
+        sayA() {
+            console.log(this.name + this.age)
+        }
+    }
+
+    var objA = new PersonA("wen", 30);
+    objA.sayA();
+
+    // 继承
+    class PersonB extends PersonA{
+        constructor(name, age) {
+            super(name, age) // super指代了整个prototype或者proto指向的对象
+        }   
+    }
+    var objB = new PersonB("ke", 32);
+    objB.sayA();
+
+
+    // generator
+    function* generator(){
+        var arr = [2,4,5,88];
+        for(i of arr){
+            yield i;
+        }
+    }
+    var generator = generator()
+    console.log( generator.next())
+    console.log( generator.next())
+</script>
+
+</html>
