@@ -6,32 +6,29 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>js执行上下文栈和作用域链的关系</title>
+   <link rel="stylesheet" href="../css/common.css">
 </head>
 
 <body>
    <ul>
       <li>
-         <a href="https://www.jianshu.com/p/11d3c56cf98c">简书</a>
+         <a href="https://www.jianshu.com/p/11d3c56cf98c" target="_blank">简书</a>
       </li>
       <li>
-         <a href="https://www.cnblogs.com/songjum/p/4545800.html">博客园讲解</a>
+         <a href="https://www.cnblogs.com/songjum/p/4545800.html" target="_blank">博客园讲解</a>
       </li>
       <li>
-         <a href="https://www.cnblogs.com/songjum/p/4545800.html">博客园讲解</a>
-         <a href="https://www.cnblogs.com/Ry-yuan/p/7865480.html">博客园讲解</a>
+         <a href="https://www.cnblogs.com/Ry-yuan/p/7868029.html" target="_blank">博客园讲解</a>
+         <a href="https://www.cnblogs.com/Ry-yuan/p/7865480.html" target="_blank">博客园讲解</a>
       </li>
    </ul>
    <div>
-      <h4>js执行上下文</h4>
-      <p>执行上下文又称执行环境<br>
-         活动的执行上下文组在逻辑上组成一个堆栈。堆栈底部永远都是全局上下文(global context)，而顶部就是当前(活动的)执行上下文。堆栈在EC类型进入和退出上下文的时候被修改（进栈或出栈）。
-         <h5 class="col_r">全局的执行上下文始终在堆栈底部，其余的FunctionContext按激活顺序被压入，结束时被弹出</h5>
-      </p>
-
-      <h4>作用域链</h4>
-      <p>是在函数创建的时候就确定的</p>
+      JS引擎是浏览器的重要组成部分，主要用于读取并执行js。就是这家伙执行js的，但它不止于执行js。
+      各大浏览器的JS引擎是什么，在这不详赘述，每个浏览器的JS引擎都不同，但他们执行js机制大致相同。
+      大家都知道JS是单线程一步步执行下来的，所以JS执行单线程是**，JS引擎会维护一个执行栈（先进后出）。
+      那大家可能会问，什么是执行栈呢？执行栈就是将执行上下文按激活顺序依次压入到执行栈中，栈顶的执行上下文获得执行权，并按顺序执行当前上下文中的代码，执行完后弹栈销毁上下文，执行权交给下一个栈顶执行上下文。
    </div>
-
+   <b class="col_r">具体请看上面的相关链接</b>
 </body>
 <script>
    // 执行上下文
@@ -44,30 +41,48 @@
       return 'hello';
    }
 
-// 解释
-//执行栈
-// var exeStack = [];
-//先压如全局执行环境
-// exeStack.push('globalContext');
-//遇到执行sayHello函数，ok，压进去
-// exeStack.push('sayHello');
-//执行sayHello函数发现，还有个getMessage函数，ok，压进栈
-// exeStack.push('getMessage');
-//执行完了getMessage函数，弹栈
-// exeStack.pop();
-//继续执行sayHello函数，又发现有console.log这个家伙，ok，你进栈
-// exeStack.push('console.log');
-//执行了console后，输出hello，console 弹栈
-// exeStack.pop();
-//这时sayHello执行完，弹栈
-// exeStack.pop();
-//最后整个代码执行完，全局环境弹栈
-// exeStack.pop();
+   // 解释
+   //执行栈
+   // var exeStack = [];
+   //先压如全局执行环境
+   // exeStack.push('globalContext');
+   //遇到执行sayHello函数，ok，压进去
+   // exeStack.push('sayHello');
+   //执行sayHello函数发现，还有个getMessage函数，ok，压进栈
+   // exeStack.push('getMessage');
+   //执行完了getMessage函数，弹栈
+   // exeStack.pop();
+   //继续执行sayHello函数，又发现有console.log这个家伙，ok，你进栈
+   // exeStack.push('console.log');
+   //执行了console后，输出hello，console 弹栈
+   // exeStack.pop();
+   //这时sayHello执行完，弹栈
+   // exeStack.pop();
+   //最后整个代码执行完，全局环境弹栈
+   // exeStack.pop();
 
 
 
+   var global_var = -1;
 
+   function outter() {
+      var outter_var = 111;
+      console.log(
+         "in outter, global_var = " + global_var +
+         ", outter_var = " + outter_var
+      );
 
+      function inner() {
+         var inner_var = 333;
+         console.log(
+            "in inner, global_var = " + global_var +
+            ", outter_var = " + outter_var +
+            ", inner_var = " + inner_var
+         );
+      }
+      inner();
+   }
+   outter();
 </script>
 
 </html>
