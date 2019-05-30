@@ -5,30 +5,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>var let cost的区别</title>
+    <title>var let const的区别</title>
+    <link rel="stylesheet" href="../css/common.css">
 </head>
 
 <body>
     <ul>
         <li>
-            <a href="https://blog.csdn.net/qq_36671474/article/details/81986198">csdn1</a>
+            <a href="https://blog.csdn.net/qq_36671474/article/details/81986198" target="_blank">csdn1</a>
         </li>
         <li>
-            <a href="https://blog.csdn.net/lizhengxv/article/details/80552081">csdn2</a>
+            <a href="https://blog.csdn.net/lizhengxv/article/details/80552081" target="_blank">csdn2</a>
         </li>
     </ul>
+    <p>
+        es5中只有全局作用域和函数作用域，并没有块级作用域，因此在es6中就增加了 let和const两个命令来改善var的一些不合理，不严谨的地方。
+        下面我就就进行一一的对比，比较一些他们之间的区别 ，go
+    </p>
     <div>
-
+        <h4>let 命令</h4>
+        <ul>
+            <li class="col_r">不存在变量提示</li>
+            <p>如果不知道什么是变量提升，可以具体看下，艳的昨天的问题，js的执行上下文，里面有详细的解释，简单的例子</p>
+            <li class="col_r">作用域是块级作用域</li>
+            <p>es5中只有函数作用域和全局作用域</p>
+            <p>let声明的变量只在所声明的代码块内有效。块级作用域由 { } 包括，if语句和for语句里面的{ }也属于块作用域。</p>
+            <p></p>
+            <li class="col_r">let不允许在同一作用域内重复声明同一个变量</li>
+            <p>
+                在同一作用域内，如果使用var声明同一个变量，则后面的覆盖前面的,但是用let 重复声明同一个变量会发什么什么呢，请看代码
+            </p>
+            <li class="col_r">存在暂时性死区
+            </li>
+            <p class="col_r">暂时性死区的本质就是，只要一进入当前作用域，所使用的变量就已存在，但是不可获取，只有等到声明变量的哪一行代码的出现，在可以获取和使用该变量</p>
+        </ul>
+        <h4>const 命令</h4>
+        <p>const命令和let相似，但也有不同之处</p>
+        <ul>
+            <li>const用来声明常量，一旦声明，其值就不能更改</li>
+            <li>
+                那么如果使用const声明对象呢？
+                我们可以看到，使用const声明的对象的属性是可以修改。
+                因为Object类型是引用类型。用const声明常量保存的是对象的地址，不可变的是地址，在上面的代码中就是，不能把 b
+                指向另一个对象。而修改对象的属性，并不会改变对象的地址，因此用const声明对象的属性是可以修改的
+            </li>
+        </ul>
     </div>
 
 </body>
 <script>
-    if (1) {
-        var a = 1;
-        let b = 2;
+    //    变量提升的例子
+    console.log(a1)
+    // console.log(a2)
+    var a1 = 1;
+    let a2 = 2;
+
+    // 作用域是块级作用域的例子
+    if (true) {
+        var b1 = 1;
+        let b2 = 2;
     }
-    console.log(a);
-    console.log(b)
+    console.log(b1)
+    // console.log(b2)
+
+    // 不能在同一个作用域下重复声明同一个变量
+    var c1 = 1;
+    var c1 = 2;
+    console.log(c1); // 2
+    let c2 = 1;
+    // let c2 = 2;
+    let c3 = 3
+    console.log(c2); // 报错 “Identifier 'c2' has already been declared”
+
+    if (true) {
+        let c3 = 33;
+    }
+    console.log(c3); // 3
+
+    // 理解暂时性死区
+    let d = 10;
+    function fn() {
+        // console.log(d);
+        let d = 5;
+    }
+
+    fn(); //  ReferenceError: Cannot access 'd' before initialization
+
+
+    // const 
+    const f1 = 1;
+    // var f1 = 2;  
+    console.log(f1); // Identifier 'f1' has already been declared
+
+    const obj = {
+        name:"xixi",
+        age :28
+    }
+    obj.name = "xiaxia"
+    console.log(obj.name + obj.age)
 </script>
 
 </html>
