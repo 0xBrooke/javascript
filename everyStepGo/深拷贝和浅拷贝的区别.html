@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深拷贝和浅拷贝的区别</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="https://www.cnblogs.com/echolun/p/7889848.html" target="_blank">博客园</a>
+        </li>
+        <li>
+            <a href="https://www.jianshu.com/p/66ddd635942c" target="_blank">简书</a>
+        </li>
+    </ul>
+    <div>
+        <h4>浅拷贝</h4>
+        <ul>
+            <li>
+                浅拷贝只能拷贝第一层的元素,如果值中还有对象的话,二者享用相同地址
+            </li>
+            <li>
+                浅拷贝是会将对象的每个属性进行依次复制
+            </li>
+            <li>
+                但是当对象的属性值是引用类型时，实质复制的是其引用，当引用指向的值改变时也会跟着变化。
+            </li>
+        </ul>
+        <h4>深拷贝</h4>
+        <ul>
+            <li>
+                深拷贝复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。
+            </li>
+            <li>
+                深拷贝后的对象与原来的对象是完全隔离的，互不影响.
+            </li>
+
+        </ul>
+    </div>
+    <h3>hasOwnProperty 知识点</h3>
+    <p>
+        hasOwnProperty() 方法会返回一个布尔值，指示对象<b class="col_r">自身属性中</b>是否具有指定的属性
+        注意是自身属性哦
+    </p>
+</body>
+<script>
+    // 浅拷贝
+    let a = [1, 2, 3];
+    let b = a;
+    console.log(a === b);
+    b[0] = "ff";
+    console.log(a);
+    let as = {
+        name: 'eee',
+        age: 33,
+        arr: [32, 23, 44]
+    };
+    let bs = { ...as };
+    as.name = "kkk";
+    as.arr[1] = "arr";
+    console.log(as, bs)
+    // 深拷贝
+    // 这么我们封装一个深拷贝的函数(PS：只是一个基本实现的展示，并非最佳实践)
+    function deepClone(obj) {
+        let objClone = Array.isArray(obj) ? [] : {};
+        // 排除obj 不能为空并且类型 不是 基本类型 和 funtion
+        if (obj && typeof obj == "object") {
+            for (key in obj) {
+                // 由于for.... in .... 引起的 便利可枚举的属性，也有可能是继承的属性，才有了hasOwnProperty 
+                // 这块涉及到一个 hasOwnProperty 知识点
+                if (obj.hasOwnProperty(key)) {
+                    if (obj[key] && typeof obj[key] === "object") {
+                        objClone[key] = deepClone(obj[key])
+                    } else {
+                        // 简单的复制
+                        objClone[key] = obj[key];
+                    }
+                }
+
+            }
+        }
+        return objClone;
+    }
+    // 数组
+    let a1 = [1, 3, 4];
+    let b1 = deepClone(a1);
+    a1[0] = 'aa';
+    console.log(a1, b1);
+
+    let a2 = {
+        name: 'xia',
+        age: 23
+    }
+    let b2 = deepClone(a2);
+    a2.name = 'keke';
+    console.log(a2, b2);
+
+    // 方法二 适用于简单的深拷贝 (技巧)
+    let a3 = [2, 4, 6];
+    let _b3 = JSON.stringify(a3);
+    let b3 = JSON.parse(_b3);
+    a3[2] = "hh";
+    console.log(a3, b3)
+    let a4 = {
+        name: "kkk",
+        age: 34,
+        address: {
+            address1: "hebei",
+            address2: "beijng"
+        }
+    };
+    let _b4 = JSON.stringify(a4);
+    let b4 = JSON.parse(_b4);
+    a4.name = "wen";
+    a4.address.address1 = "ggggg"
+    console.log(a4, b4);
+
+    // 递归 (最完美的实现) 棒棒的
+    function deepCloneX(obj) { //递归拷贝
+        if (obj instanceof RegExp) return new RegExp(obj);
+        if (obj instanceof Date) return new Date(obj);
+        // 递归的时候如果是个 funtion的时候 也直接返回一个函数
+        if (obj === null || typeof obj !== 'object') {
+            //如果不是复杂数据类型，直接返回
+            return obj;
+        }
+        /**
+         * 如果obj是数组，那么 obj.constructor 是 [Function: Array]
+         * 如果obj是对象，那么 obj.constructor 是 [Function: Object]
+         */
+        let newObj = new obj.constructor();
+        for (let key in obj) {
+            //如果 obj[key] 是复杂数据类型，递归
+            if (obj.hasOwnProperty(key)) {//是否是自身的属性
+                newObj[key] = deepCloneX(obj[key]);
+            }
+        }
+        return newObj;
+    }
+    // 简书 
+    function deepCloneJ(initalObj) {
+        const obj = {};
+        if (typeof initalObj !== 'object') {
+            return initalObj
+        }
+        for (const key in initalObj) {
+            if (typeof initalObj[key] === 'object') {
+                //对数组特殊处理
+                if (Array.isArray(initalObj[key])) {
+                    //用map方法返回新数组，将数组中的元素递归
+                    obj[key] = initalObj[key].map(item => this.deepCloneJ(item))
+                } else {
+                    //递归返回新的对象
+                    obj[key] = this.deepCloneJ(initalObj[key]);
+                }
+            } else if (typeof initalObj[key] === 'function') {
+                //返回新函数
+                obj[key] = initalObj[key].bind(obj);
+            } else {
+                //基本类型直接返回
+                obj[key] = initalObj[key];
+            }
+        }
+        return obj;
+    }
+    let obj11 = {
+        // name:'xwk',
+        // age:29,
+        // address:{
+        //     address1:"hebei",
+        //     address2:[23,34]
+        // },
+        style: function () {
+            console.log("my is myself")
+        }
+    }
+    let obj22 = deepCloneJ(obj11);
+    obj22.style()
+</script>
+
+</html>
