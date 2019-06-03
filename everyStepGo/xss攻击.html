@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>xss攻击的相关知识</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="https://www.cnblogs.com/caizhenbo/p/6836390.html" target="_blank">博客园</a>
+        </li>
+        <li>
+            <a href="https://www.freebuf.com/articles/web/185654.html" target="_blank">美团的前端开发</a>
+        </li>
+    </ul>
+    <h4>什么是xss</h4>
+    <div>
+        Cross-Site Scripting（跨站脚本攻击）简称 XSS，是一种代码注入攻击。攻击者通过在目标网站上注入恶意脚本，使之在用户的浏览器上运行。利用这些恶意脚本，攻击者可获取用户的敏感信息如
+        Cookie、SessionID 等，进而危害数据安全。
+        为了和 CSS 区分，这里把攻击的第一个字母改成了 X，于是叫做 XSS。
+    </div>
+    <h4>xss本质</h4>
+    <div>
+        XSS 的本质是：恶意代码未经过滤，与网站正常的代码混在一起；浏览器无法分辨哪些脚本是可信的，导致恶意脚本被执行。
+        而由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，或者利用这些信息冒充用户向网站发起攻击者定义的请求。
+        在部分情况下，由于输入的限制，注入的恶意脚本比较短。但可以通过引入外部的脚本，并由浏览器执行，来完成比较复杂的攻击策略
+    </div>
+    
+</body>
+
+</html>
