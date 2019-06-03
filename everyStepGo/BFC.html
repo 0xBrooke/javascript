@@ -8,6 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BFC</title>
     <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .container p {
+            width: 100px;
+            height: 100px;
+            background: #ae2;
+            margin: 20px;
+        }
+        .container1{
+            width: 500px;
+        }
+        .container1 .a{
+            width: 100px;
+            height: 120px;
+            background: #a3e;
+            float: left;
+        }
+        .container1 .b{
+            height: 160px;
+            background: #e2a;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,6 +99,20 @@
         当BFC内部有浮动时，为了不影响外部元素的布局，BFC计算高度时会把内部浮动元素的高度也计算在内，
         避免margin重叠也是这样一个道理；
     </h3>
+    <h3>实践应用</h3>
+
+
+    <div class="container">
+        <div>
+            <p>发的发生</p>
+        </div>
+        <p>发的发生11</p>
+    </div>
+    <div class="container1">
+
+        <div class="a">aaaaaa</div>
+        <div class="b">bbbbbb</div>
+    </div>
 </body>
 
 </html>

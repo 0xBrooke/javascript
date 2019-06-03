@@ -30,12 +30,14 @@
 
     </h4>
     <h4>
-        应用场景
+        节流的应用场景
     </h4>
     <ul>
         <li>DOM元素拖拽 mousemove,mousedown事件</li>
         <li>游戏中的刷新率</li>
         <li>Canvas画笔功能</li>
+        <li>onScoll</li>
+        <li>按钮点击事件</li>
     </ul>
     <div>
         <ul>
@@ -136,7 +138,7 @@
 
     // 节流  监听界面是否滚动到底部
     function throttle(fn, delay = 500) {
-        var prev = Date.now();
+        var prev = 0;
         return function () {
             var context = this;
             var args = arguments;

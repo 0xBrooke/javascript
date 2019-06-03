@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>闭包</title>
-   <link rel="stylesheet" href="../css/common.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+    <link rel="stylesheet" href="../css/common.css">
 </head>
+
 <body>
-    <ul>    
+    <ul>
         <li>
             <a href="https://www.jianshu.com/p/d7fbf97a0316">简书</a>
         </li>
     </ul>
-    
-   <div>
-       
-   </div>
+
+    <div>
+
+    </div>
 
 </body>
-   <script>
-       
-   </script>
+<script>
+    var a = []
+    for (var i = 0; i < 10; i++) {
+        a[i] = (function (j) {
+            //    数组a中储存的是ff函数，切每一个j 都一一对应相应的i值
+            return function ff() {
+                console.log(j)
+            }
+        })(i)
+    }
+
+    a[6]();
+    console.log(a);
+</script>
+
 </html>

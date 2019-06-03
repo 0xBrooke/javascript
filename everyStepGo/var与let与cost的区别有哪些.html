@@ -98,11 +98,33 @@
     console.log(f1); // Identifier 'f1' has already been declared
 
     const obj = {
-        name:"xixi",
-        age :28
+        name: "xixi",
+        age: 28
     }
     obj.name = "xiaxia"
     console.log(obj.name + obj.age)
+
+    // var 和let的区别  非常好的例子
+    var a = []
+    for (var i = 0; i < 10; i++) {
+        a[i] = (function (j) {
+            //    数组a中储存的是ff函数，切每一个j 都一一对应相应的i值
+            return function ff() {
+                console.log(j)
+            }
+        })(i)
+    }
+    a[6]();
+    console.log(a);
+
+    let b = []
+    for (let k = 0; k < 10; k++) {
+        b[k] = function () {
+            console.log(k)
+        }
+    }
+    b[6]();
+    console.log(b);
 </script>
 
 </html>
