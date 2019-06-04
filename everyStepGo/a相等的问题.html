@@ -40,9 +40,11 @@
 </body>
 <script>
     // 如果是个对象
-    var a = { value: 0 }
-    a.valueOf = function () {
-        return this.value += 1
+    var a = {
+        value: 0,
+        valueOf: function () {
+            return this.value += 1
+        }
     }
     if (a == 1 && a == 2 && a == 3) {
         console.log("a今天我又进步了")
@@ -116,6 +118,19 @@
         console.log("toString")
     }
     console.log(arr == 2)
+
+    // 补充
+    let e = {
+        [Symbol.toPrimitive]: (function (hint) {
+            let i = 1;
+            //闭包的特性之一：i 不会被回收
+            return function () {
+                return i++;
+            }
+        })()
+    }
+    console.log(e == 1 && e == 2 && e == 3); //true
+
 </script>
 
 </html>
