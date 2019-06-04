@@ -19,18 +19,14 @@
     <!-- link -->
     <ul>
         <li>
-            <a href="https://www.cnblogs.com/heioray/p/9487093.html">博客园讲解</a>
+            <a href="https://www.cnblogs.com/heioray/p/9487093.html" target="_blank">博客园讲解</a>
         </li>
         <li>
-            <a href="https://www.cnblogs.com/c2016c/articles/9328725.html">基本数据类型和复杂数据类型的区别（也设计到了堆与栈）</a>
+            <a href="https://www.cnblogs.com/c2016c/articles/9328725.html"
+                target="_blank">基本数据类型和复杂数据类型的区别（也设计到了堆与栈）</a>
         </li>
     </ul>
-    <h3>instanceOf的实现原理</h3>
-    <ul>
-        <li>
-            <a href="https://blog.csdn.net/qq_38722097/article/details/80717240">CSDN 讲解(非常棒)</a>
-        </li>
-    </ul>
+   
     <h3>for循环的相关知识</h3>
     <ul>
         <li>
@@ -42,16 +38,17 @@
     </ul>
     <h3> == === 的区别详解</h3>
     <ul>
-        <li><a href="https://blog.csdn.net/magic_xiang/article/details/83686224">CSDN</a></li>
+        <li><a href="https://blog.csdn.net/magic_xiang/article/details/83686224" target="_blank">CSDN</a></li>
     </ul>
 </body>
 <!-- 堆与栈 -->
 
 <script>
-    var a = new String("123");
-    var b = String("123");
-    var c = "124";
-    console.log(a == b, a === b);
+    var a = new String("123"); // Object
+    var b = String("123");  // String
+    var c = "123";
+    console.log(a == b, a === b, b == c,b===c, a == c,a===c);
+    console.log()
     var d = new String("123");
     console.log(a == d);
 
@@ -66,23 +63,7 @@
     }
     console.log(typeof Foo);
 
-    // instanceof 的原型
 
-    let num = 134
-    function instance_of(L, R) {
-        var O = R.prototype; // 取R的显示原型
-        L = L.__proto__;    // 取L的隐示原型 
-        while (true) { // 一直循环的意思
-            if (L === null) {
-                return "不是"
-            }
-            if (L === O) {
-                return "是"
-            }
-            L = L.__proto__; // 继续向上一层查找
-        }
-    }
-    console.log(instance_of(c, Number));
 
 
     // for
@@ -118,7 +99,7 @@
     console.log(person1.age)
     console.log(person2 === person1)
 
-    console.log("null是对象吗",typeof null === "object")
+    console.log("null是对象吗", typeof null === "object")
 </script>
 
 </html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>instancof 详解</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <h3>instanceOf的实现原理</h3>
+    <ul>
+        <li>
+            <a href="https://blog.csdn.net/qq_38722097/article/details/80717240" target="_blank">CSDN 讲解(非常棒)</a>
+        </li>
+        <li><a href="https://blog.csdn.net/qq_30100043/article/details/53423848">优化instanceOf中的__proto__属性</a></li>
+    </ul>
+    <div>
+
+    </div>
+
+</body>
+<script>
+    // instanceof 的原理
+    let num = 134;
+    var foo = function(){};
+    var arr = [1, 324];
+    var str = 'adfa'
+
+    function instance_of1(L, R) {
+        var O = R.prototype; // 取R的显示原型
+        let leftProto = L.__proto__;    // 取L的隐示原型 
+        while (true) { // 一直循环的意思
+            if (leftProto === null) {
+                return "不是"
+            }
+            if (leftProto === O) {
+                return "是"
+            }
+            leftProto = leftProto.__proto__; // 继续向上一层查找
+        }
+    }
+    console.log(instance_of1(foo, Number));
+
+
+    // 方法二  用 getPrototypeOf()
+    function instance_of2(left, right) {
+        let rightProto = right.prototype; 
+        let leftPro = Object.getPrototypeOf(left); // 注意这个left的变量，这有个坑。。。
+        while (true) {
+            if (leftPro == null) {
+                return false
+            }
+            if (leftPro === rightProto) {
+                return true;
+            }
+            leftPro = Object.getPrototypeOf(leftPro) // 这里的leftPro是上面重新定义的原型
+        }
+    }
+    console.log(instance_of2(foo,Number));
+    
+</script>
+
+</html>
