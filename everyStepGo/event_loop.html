@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>event-loop</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="https://juejin.im/post/5c947bca5188257de704121d" target="_blank">掘金-刘小夕</a>
+        </li>
+    </ul>
+    <div>
+        所有的同步任务都在主线程上执行，之外还存在任务队列；
+        任务队列就是，异步任务有了执行结果，就会在任务队列中放置一个事件；
+        <h4>异步任务：</h4>
+        <ul>
+            <li>宏任务: script（整体代码）, setTimeout, setInterval, setImmediate, I/O, UI rendering</li>
+            <li>微任务: process.nextTick（Nodejs）, Promises, Object.observe, MutationObserver;</li>
+        </ul>
+
+        <p class="col_r">简单说就是同步任务和异步任务，永远优先执行同步任务，异步任务中的宏任务和微任务永远优先执行微任务，宏任务在整个js执行过程中永远处于最后执行!</p>
+    </div>
+    <h4>实例详解</h4>
+    <ol>
+        <li>首先顺序执行完主进程上的同步任务，第一句的console.log()和new Promise()中的以及最后一句的console.log</li>
+        <li>
+            接着遇到setTimeout 0，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在下一次的事件循环中执行)。
+        </li>
+        <li>
+            接着遇到setTimeout 200，它的作用是在 200ms 后将回调函数放到宏任务队列中(这个任务在再下一次的事件循环中执行)。
+        </li>
+        <li>
+            同步任务执行完之后，首先检查微任务队列, 即 microtask队列，发现此队列不为空，执行第一个promise的then回调，输出
+            'promise1'，然后执行第二个promise的then回调，输出'promise3'，由于第一个promise的.then()的返回依然是promise，所以第二个.then()会放到microtask队列继续执行，输出
+            'promise2';
+        </li>
+        <li>
+            此时microtask队列为空，进入下一个事件循环, 检查宏任务队列，发现有 setTimeout的回调函数，立即执行回调函数输出 'setTimeout---0',检查microtask
+            队列，队列为空，进入下一次事件循环.
+        </li>
+        <li>
+            检查宏任务队列，发现有 setTimeout的回调函数, 立即执行回调函数输出'setTimeout---200'.
+        </li>
+        <li>
+            接着遇到setTimeout 0，它的作用是在 0ms 后将回调函数放到宏任务队列中，检查微任务队列，即 microtask 队列，发现此队列不为空，执行promise的then回调，输出'promise5'。
+        </li>
+        <li>
+            此时microtask队列为空，进入下一个事件循环，检查宏任务队列，发现有 setTimeout 的回调函数，立即执行回调函数输出，输出'inner-setTimeout---0'。代码执行结束.
+        </li>
+    </ol>
+</body>
+<script>
+    // 实例
+    console.log('script start');
+
+    setTimeout(function () {
+        console.log('setTimeout---0');
+    }, 0);
+
+    setTimeout(function () {
+        console.log('setTimeout---200');
+        setTimeout(function () {
+            console.log('inner-setTimeout---0');
+        });
+        Promise.resolve().then(function () {
+            console.log('promise5');
+        });
+    }, 200);
+
+    var promise = new Promise((resolve, reject) => {
+        // 注意是在同步任务里面
+        console.log("Promise")
+        resolve()
+    })
+    promise.then(function () {
+        console.log('promise1');
+    }).then(function () {
+        console.log('promise2');
+    });
+    promise.then(function () {
+        console.log('promise3');
+    });
+    console.log('script end');
+
+
+
+</script>
+
+</html>
