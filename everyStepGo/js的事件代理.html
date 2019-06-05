@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js的事件代理</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="http://www.fly63.com/article/detial/2173">前端网</a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xiayu25/p/6269652.html">事件委托的优缺点</a>
+        </li>
+    </ul>
+    <p>
+        <h5>概念</h5>
+        <span>
+            事件委托，又称为事件代理，通俗来讲是将元素的事件函数处理交由其他对象处理。它允许您避免向特定节点添加事件侦听器，我们这里所谈论的事件委托，与冒泡捕获流程相关，因此事件委托在此场景指的是子对象的处理事件交由父对象处理
+        </span>
+
+        <div>
+            <h5> 优点</h5>
+            <ul>
+                <li>
+                    1.可以大量节省内存占用，减少事件注册。比如ul上代理所有li的click事件就很不错。
+                </li>
+                <li> 2.可以实现当新增子对象时，无需再对其进行事件绑定，对于动态内容部分尤为合适</li>
+            </ul>
+            <h5> 缺点</h5>
+            <p>
+                事件代理的常用应用应该仅限于上述需求，如果把所有事件都用事件代理，可能会出现事件误判。即本不该被触发的事件被绑定上了事件。
+            </p>
+
+        </div>
+    </p>
+    <h4>实例</h4>
+    <div>
+        <p>浏览器默认是事件冒泡</p>
+        <p onclick="p()">
+            <span onclick="span()">点击我</span>
+        </p>
+    </div>
+    <div>
+        <p>addEventListener()中的第三个参数默认为false，是事件冒泡；true：为事件捕获</p>
+        <div id="divFalse">
+            <button type="button" id="butfalse">我是事件冒泡</button>
+        </div>
+        <div id="divTrue">
+            <button type="button" id="butTrue">我是事件捕获</button>
+        </div>
+    </div>
+    <div id="ulList">
+        <ul>
+            <li class="item" data-id="1">li1</li>
+            <li class="item" data-id="2">li2</li>
+            <li class="item" data-id="3">li3</li>
+            <li class="item">li4</li>
+            <li class="item">li5</li>
+        </ul>
+        <p>点击内容 <span id="text"></span></p>
+    </div>
+
+</body>
+<script>
+    // 一
+    function p() {
+        console.log("p");
+    }
+    function span() {
+        console.log("span")
+    }
+    // 事件冒泡
+    let divFalse = document.getElementById("divFalse");
+    let butfalse = document.getElementById("butfalse");
+    divFalse.addEventListener("click", function (e) {
+        console.log("divFalse")
+    }, false);
+    butfalse.addEventListener("click", function (e) {
+        // e.stopPropagation();
+        console.log("butfalse")
+    });
+    // 事件捕获
+    let divTrue = document.getElementById("divTrue");
+    let butTrue = document.getElementById("butTrue");
+    divTrue.addEventListener("click", function (e) {
+        // e.stopPropagation();
+        console.log("divTrue")
+    }, true);
+    butTrue.addEventListener("click", function (e) {
+
+        console.log("butTrue")
+    });
+
+    // 实例棒 
+    let ulList = document.getElementById("ulList");
+    let text = document.getElementById("text");
+    ulList.addEventListener("click", function (e) {
+        console.log(e.currentTarget); // 注册事件对象的引用，所绑定的事件
+        console.log(e.target);  // 事件起源的目标（当前的触发事件）
+        console.log(e.target.className);
+        console.log(e.target.nodeName);
+        console.log(e.target.tagName === "LI");
+        console.log(e.target.dataset);
+        console.log(e.target.dataset.id);
+        if (e.target.dataset.id != undefined) {
+            text.innerHTML = e.target.innerHTML;
+        }
+
+    })
+</script>
+
+</html>
