@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>arguments</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function arg(name, age) {
+        console.log(arguments)
+    }
+
+    arg([324, 2344, 234], "ewr")
+
+
+    // 提取数字
+    let str = "pgv=65622228345;uid=rwerrwer;pgv=63843535353";
+    // 方法一
+    let arr = str.match(/\d+/g);
+    console.log(arr);
+    // 方法二
+    function num(str) {
+        let arr1 = [];
+        let itme = ''
+        for (let i = 0; i < str.length; i++) {
+            if (!isNaN(str[i])) {
+                itme += str[i];
+            } else {
+                if (itme) {
+                    arr1.push(itme);
+                    itme = ''
+                }
+            }
+        }
+        if (itme) {
+            arr1.push(itme)
+        }
+        return arr1;
+    }
+    console.log(num(str));
+
+    let arr2 = [2, 4, 5, 7, 6];
+    let arr3 = arr2.map(itme => itme + 1);
+    console.log(arr3);
+
+    const p1 = {
+        name: "xia",
+        age: 28
+    }
+    function test(person) {
+        person.age = 29;
+        person = {
+            name: "wen",
+            age: 31
+        }
+        return person
+    }
+    var p2 = test(p1);
+    console.log(p1)
+    console.log(p2)
+
+
+    function time(){
+        for(var i=0;i<5;i++){
+            (function(j){
+                setTimeout(function(){
+                console.log(j)
+            },j*1000)
+            })(i)
+           
+        }
+    }
+    time()
+</script>
+
+</html>
