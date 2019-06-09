@@ -23,7 +23,11 @@
         <div class="col_r">
             浅拷贝是会将对象的每个属性进行依次复制，但是当对象的属性值是引用类型时，实质复制的是其引用，当引用指向的值改变时也会跟着变化。
         </div>
-
+        <p>
+            可以使用
+            for in、Object.assign、 扩展运算符 ... 、
+            Array.prototype.slice()、Array.prototype.concat()，
+        </p>
         <h4>深拷贝</h4>
         <div class="col_r">
             深拷贝复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。 深拷贝后的对象与原来的对象是完全隔离的，互不影响，对一个对象的修改并不会影响另一个对象。
@@ -55,10 +59,11 @@
         age: 33,
         arr: [32, 23, 44]
     };
-    let bs = { ...as };
+    let bs = { ...as }; // 扩展符
+    let cs = Object.assign({}, as); // assign方法
     as.name = "kkk";
     as.arr[1] = "arr";
-    console.log(as, bs)
+    console.log(as, bs, cs)
     // 深拷贝
     // 这么我们封装一个深拷贝的函数(PS：只是一个基本实现的展示，并非最佳实践)
     function deepClone(obj) {

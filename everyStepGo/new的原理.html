@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New的原理</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="https://blog.csdn.net/lyt_angularjs/article/details/86623988" target="_blank">csdn</a>
+        </li>
+    </ul>
+    <div>
+
+    </div>
+</body>
+
+<script>
+    // 重点重点
+    function _new(...args) {
+        let constructor = args[0];//获取构造函数
+        let obj = Object.create(constructor.prototype);//创建空对象,并将原型指向构造函数的原型
+        let res = constructor.call(obj, ...args.slice(1));//call强行将this指向第一个参数
+        if ((typeof res === 'object' || typeof res === 'function') && res != null) {
+            return res;
+        } else {
+            return obj;
+        }
+    }
+
+
+</script>
+
+</html>
