@@ -14,10 +14,16 @@
 <body>
     <ul>
         <li>
-            <a href="https://www.jianshu.com/p/d7fbf97a0316">简书</a>
+            <a href="https://www.jianshu.com/p/d7fbf97a0316" target="_blank">简书</a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/amcy/p/9912528.html" target="_blank">博客园</a>
         </li>
     </ul>
+    <!-- 概念 -->
+    <div>
 
+    </div>
 
 </body>
 <script>
@@ -30,9 +36,25 @@
             }
         })(i)
     }
-
     a[6]();
     console.log(a);
+
+
+    // 闭包
+    var name = "keke"
+    var obj1 = {
+        name :"xia",
+        getName1:function(){
+            return this.name;
+        },
+        getName2:function(){
+            return function(){
+                return this.name
+            }
+        }
+    }
+    console.log(obj1.getName1())
+    console.log(obj1.getName2()())
 </script>
 
 </html>
