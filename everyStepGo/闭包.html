@@ -19,18 +19,54 @@
         <li>
             <a href="https://www.cnblogs.com/amcy/p/9912528.html" target="_blank">博客园</a>
         </li>
+        <li>
+            <a href="https://www.cnblogs.com/zuoan-oopp/p/6642195.html" target="_blank">博客园</a>
+        </li>
+        <li>
+            <a href="https://blog.csdn.net/qq_40647912/article/details/88079637" target="_blank">闭包的私有变量</a>
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/wswq/p/6282920.html">闭包的模块化</a>
+        </li>
     </ul>
     <!-- 概念 -->
-    <div>
+    <h4>概念</h4>
+    <p class="col_r">
+        我的理解：闭包就是能够读取其他函数内部变量的函数。在JS中，只有在函数内部的子函数才能读取局部变量，因此可以简单理解成“定义在函数内部的函数”，
+        所以在本质上：闭包就是将函数内部和函数外部连接起来的一个桥梁。
+    </p>
+    <h4>作用</h4>
+    <ul>
+        <li>1、封装私有变量</li>
+        <li>2、实现模块化</li>
+        <li>3、模拟块级作用域</li>
+    </ul>
 
-    </div>
-
+    <ul id="uL">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
 </body>
 <script>
+    // 作用案例 ：块级作用域
+    window.onload = function () {
+        var uLid = document.getElementById("uL");
+        var lis = uLid.getElementsByTagName("li");
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onclick = (function (j) {
+                return function () {
+                    console.log(j);
+                }
+            })(i)
+        }
+    }
+
     var a = []
     for (var i = 0; i < 10; i++) {
         a[i] = (function (j) {
-            //    数组a中储存的是ff函数，切每一个j 都一一对应相应的i值
+            //    数组a中储存的是ff函数，且每一个参数j 都一一对应 相应的i值
             return function ff() {
                 console.log(j)
             }
@@ -43,18 +79,62 @@
     // 闭包
     var name = "keke"
     var obj1 = {
-        name :"xia",
-        getName1:function(){
+        name: "xia",
+        getName1: function () {
             return this.name;
         },
-        getName2:function(){
-            return function(){
+        getName2: function () {
+            return function () {
                 return this.name
             }
         }
     }
     console.log(obj1.getName1())
     console.log(obj1.getName2()())
+
+    //  作用案例 ：私有变量
+
+    // 此时的Person1里面只有两个方法,
+    // 如果想通过Person1访问money是访问不到的，
+    // 如果你想通过方法调用来访问(Person.makeMoney.money)
+    // 就会返回（Uncaught TypeError: Cannot read property 'money' of undefined at<anonymous>: 1: 14）不能获取
+    // 但是Person可以操作它，但是别人不可以访问
+    function Person1() {
+        var money = 100;
+        this.makeMoney = function () {
+            return ++money;
+        }
+        this.offer = function () {
+            return --money;
+        }
+        return this;
+    }
+    var person1 = new Person1();
+    console.log(person1.makeMoney()) //101
+    console.log(person1.makeMoney()) //102
+    console.log(person1.makeMoney()) //103
+    console.log(person1.offer()) //102
+
+    // 作用案例 ：实现模块化
+    console.log("实现模块化")
+    function Person2() {
+        var money = 50;
+        function makeMoney() {
+            return ++money;
+        }
+        function offer() {
+            return --money;
+        }
+        return {
+            makeMoney:makeMoney,
+            offer:offer
+        };
+    }
+    var person2 = new Person2();
+    console.log(person2.makeMoney()) // 51
+    console.log(person2.makeMoney()) // 52
+    console.log(person2.makeMoney()) // 53
+    console.log(person2.offer()) // 52
 </script>
 
 </html>
