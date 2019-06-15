@@ -24,7 +24,7 @@
             ES6中的flat() 函数
         </li>
         <li>
-            
+
         </li>
     </ul>
     <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
@@ -49,12 +49,27 @@
         console.log(_flattenDeep(arr1));
 
 
-        //方法二
+        //方法二 Array.prototype.flat
         function flattenDeep(arr, deepLength) {
             return arr.flat(deepLength);
         }
         console.log(flattenDeep(arr1, 3));
 
+        //方法三 ... 遍历展开
+        function _forKZ(arr) {
+            var stack = [...arr];
+            var res = []; // push的对象
+            while (stack.length) { // 注意，这个循环得巧，但要用好，否则会死循环，
+                var next = stack.pop(); // 从数组的最后一个依次取出每一项；
+                if (Array.isArray(next)) {
+                    stack.push(...next);
+                } else {
+                    res.push(next);
+                }
+            }
+            return res.reverse();
+        }
+        console.log("_forKZ",_forKZ(arr1))
     </script>
 </body>
 

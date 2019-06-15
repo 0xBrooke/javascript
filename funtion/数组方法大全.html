@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>数组方法大全</title>
+    <link rel="stylesheet" href="../css/common.css">
 </head>
+
 <body>
     <ul>
-
+        <li>concat 合并数组 ：不会改变现有的数组，而仅仅会返回被连接数组的一个副本。</li>
+        <li>
+            <a href="https://www.cnblogs.com/dyqblog/p/5434803.html">详解</a>
+            pop、push、shift、unshift：并且会改变数组的本身的长度及内容
+        </li>
+        <li>
+            reverse: 将数组中的元素的顺序进行反转，在原数组上操作，然后返回原数组。
+        </li>
     </ul>
 
 
-    <script>
-        var _split = [1,4,43,343,[33,321]].toString()
-    
-    
-    </script>
+
 </body>
+<script>
+    var arr = [1, 3, 5]
+    var _concat = arr.concat([9999999])
+    console.log(_concat)
+    var _reverse = [1,6,7,3,8];
+    console.log(_reverse.reverse())
+</script>
+
 </html>
