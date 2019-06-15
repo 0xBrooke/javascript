@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <ol class="col_r">
+        <li>
+            flat: Array.prototype.flat(3) 参数为3，表示要拉平三层的嵌套数组。
+            Infinity ：不管有多少层嵌套，都要转成一维数组，可以用Infinity关键字作为参数。
+        </li>
+        <li>
+            <a href="https://www.jianshu.com/p/e375ba1cfc47">简书</a>
+            reduce() 
+        </li>
+    </ol>
+</body>
+<script>
+    var _flat = [21, 32, [34, 23, [2, 5]], [53, 99]].flat(3);
+    console.log(_flat);
+
+    var _reduce = [2, 5, 6, 9, 1,2,6,7];
+    let newReduce = _reduce.reduce((item, data) => {
+        // console.log(item, data)
+        // item 代表初始值以及回调函数
+        return item.concat(data);
+    }, [])
+    console.log(newReduce)
+    // 数组去重
+    let arrCF = _reduce.reduce((item, data) => {
+        if(!item.includes(data)){
+            return item.concat(data);
+        }else{
+            return item
+        }
+        return item.concat(item);
+    }, [])
+    console.log(arrCF)
+</script>
+
+</html>
