@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>可迭代对象的特点</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <div>
+        String，Array，TypedArray，Map 和 Set 都内置可迭代对象，因为它们的原型对象都有一个 Symbol.iterator 方法。
+    </div>
+    <ul>  
+        <li>
+            <a href="https://cloud.tencent.com/developer/chapter/13625">symbol详解</a>
+        </li>
+    </ul>
+    <h4>特点</h4>
+    <ol class="col_r">
+        <li>
+            可使用 for...of 进行循环；
+        </li>
+        <li>
+            对象或者原型链当中具有 Symbol.interator 属性；
+        </li>
+        <li>
+            可通过迭代器访问并跟踪该序列中的当前位置。（迭代器提供next()方法，返回对象包含done和value方法）
+        </li>
+    </ol>
+</body>
+<script>
+    var arr = [2, "r4", 4];
+    var _next = arr[Symbol.iterator]();
+    console.log(_next);
+    console.log(_next.next());
+    console.log(_next.next());
+
+    var a ={
+        [Symbol.toPrimitive]:(function(){
+            let i=1;
+            return function(){
+                return i++;
+            }
+        })()
+    }
+    console.log(a==1);
+</script>
+
+</html>
