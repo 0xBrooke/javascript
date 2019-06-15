@@ -9,20 +9,81 @@
 </head>
 <div>
     ES6中class没有类的概念：class是一个语法糖，其本质还是函数
-    
+
 </div>
+<ul>
+    <li>
+        <a href="https://blog.csdn.net/qq_37288477/article/details/86843455">各个继承方式的优缺点对比</a>
+    </li>
+</ul>
 
 <body>
 
 
-
-
     <script>
+        // 原型继承
+        function Adderss() {
+            this.name = "beijing";
+            this.time = 3;
+        }
+        Adderss.prototype.look = function () {
+            return this.name + ":" + this.time;
+        }
+        function BJ(time) {
+            this.time = time;
+        }
+        BJ.prototype = new Adderss();
+        var bj = new BJ(4);
+        console.log(bj.look());
+
+        // 构造函数继承
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        function Child(name, age, heigth) {
+            Person.call(this, name, age); // 
+            this.heigth = heigth;
+        }
+        var child = new Child("xiake", 28, "175");
+        console.log(child.name + ":" + child.age + ":" + child.heigth)
 
 
+        // 组合继承的方式
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.say = function () {
+            return "我是" + this.name + "今年" + this.age + "身高" + this.heigth;
+        }
+        function Child(name, age, heigth) {
+            Person.call(this, name, age); // 
+            this.heigth = heigth;
+        }
+        Child.prototype = new Person(); // 这一步很重要 若没有，无法访问原型上say()
+        var child = new Child("xiake", 28, "175");
+        console.log(child.say())
 
-
-
+        // Class
+        class Hobby {
+            constructor(first) {
+                this.first = first;
+            };
+            say(){
+                return this.name+':'+this.first;
+            }
+        }
+        class PersonClass extends Hobby {
+            constructor(name,play){
+                super(play)
+                this.name = name;
+               
+            }
+        }
+        let personClass = new PersonClass("keke","篮球");
+        console.log(personClass.say())
 
     </script>
 </body>
