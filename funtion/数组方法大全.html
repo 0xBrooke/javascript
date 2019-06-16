@@ -19,6 +19,11 @@
         <li>
             reverse: 将数组中的元素的顺序进行反转，在原数组上操作，然后返回原数组。
         </li>
+        <li>
+            <a href="https://blog.csdn.net/xiaoqingpang/article/details/79108005" target="_black">slice的详解</a>
+            slice：返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+            splice：返回被删除的项目。（该方法会改变原数组）
+        </li>
     </ul>
 
 
@@ -28,8 +33,10 @@
     var arr = [1, 3, 5]
     var _concat = arr.concat([9999999])
     console.log(_concat)
-    var _reverse = [1,6,7,3,8];
+    var _reverse = [1, 6, 7, 3, 8];
     console.log(_reverse.reverse())
+    var _slice = [1,3,4,5,6];
+    console.log(_slice.slice(1));
 </script>
 
 </html>
