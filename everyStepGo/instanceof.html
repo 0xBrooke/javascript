@@ -50,7 +50,7 @@
         let rightProto = right.prototype; 
         let leftPro = Object.getPrototypeOf(left); // 注意这个left的变量，这有个坑。。。
         while (true) {
-            if (leftPro == null) {
+            if (leftPro === null) {
                 return false
             }
             if (leftPro === rightProto) {
