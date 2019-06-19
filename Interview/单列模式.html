@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单列模式</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+
+    <ul>
+        <li>
+            <a href="https://segmentfault.com/a/1190000015384478" target="_blank">sf详解</a>
+        </li>
+    </ul>
+
+    <div>
+        单列模式：核心思想是确保一个类只对应一个实例；
+        js中可理解为确保多次构造函数时，都返回同一个实例；
+    </div>
+    <script>
+        function A() {
+            var self = this;
+            A = function () {
+                return self;
+            }
+        }
+        var a = new A();
+        console.log(a)
+        var b = new A();
+        console.log(b)
+        console.log(a === b);
+
+        var B;
+        (function (name) {
+            var instance;
+            B = function (name) {
+                if (instance) {
+                    return instance
+                }
+
+                //赋值给私有变量
+                instance = this
+
+                //自身属性
+                this.name = name
+            }
+        }());
+        B.prototype.pro1 = "from protptype1"
+
+        var a1 = new B('a1')
+        B.prototype.pro2 = "from protptype2"
+        var a2 = new B('a2')
+
+        console.log(a1.name)
+        console.log(a1.pro1)//from protptype1
+        console.log(a1.pro2)//from protptype2
+        console.log(a2.pro1)//from protptype1
+        console.log(a2.pro2)//from protptype2
+
+    </script>
+</body>
+
+</html>

@@ -16,14 +16,33 @@
         </li>
     </ul>
     <div>
-
+        new Foo();都执行了那些：首先通过new，基于这个构造函数的原型（Foo.prototype），创建一个空对象；
+        然后执行这个Foo(); 同时将Foo()中的this指向了刚创建的空对象，执行完后，判断返回结果，
+        即：构造函数中没有reutrn 或return this或基本类型的值，则返回obj在堆中的内存地址；若return 引用类型，则返回值为这个引用类型
     </div>
 </body>
 
 <script>
+    function Foo(name) {
+        this.name = name;
+    }
+    var foo = new Foo();
+
+    // 模拟new
+    function _new(fn) {
+        var constructor = Object.create(fn.prototype);
+        var res = fn.call(constructor);
+        if ((typeof res === 'object' || typeof res == 'function') && res !== null) {
+            return res;
+        } else {
+            return constructor
+        }
+    }
+
+
     // 重点重点
     function _new(...args) {
-        let constructor = args[0];//获取构造函数
+        let constructor = [0];//获取构造函数
         let obj = Object.create(constructor.prototype);//创建空对象,并将原型指向构造函数的原型
         let res = constructor.call(obj, ...args.slice(1));//call强行将this指向第一个参数
         if ((typeof res === 'object' || typeof res === 'function') && res != null) {
@@ -33,7 +52,7 @@
         }
     }
 
-    
+
 </script>
 
 </html>

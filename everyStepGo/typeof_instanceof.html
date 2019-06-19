@@ -17,6 +17,27 @@
         </li>
         <li><a href="https://blog.csdn.net/qq_30100043/article/details/53423848">优化instanceOf中的__proto__属性</a></li>
     </ul>
+    <h3>typeof 检测六种基本数据类型，都是什么?</h3>
+    <ol>
+        <li>
+            String > string
+        </li>
+        <li>
+            Number > number
+        </li>
+        <li>
+            Boolean > boolean
+        </li>
+        <li>
+            Undefind > undefind
+        </li>
+        <li>
+            null > object
+        </li>
+        <li>
+            Symbol > function
+        </li>
+    </ol>
     <div>
 
     </div>
@@ -25,7 +46,7 @@
 <script>
     // instanceof 的原理
     let num = 134;
-    var foo = function(){};
+    var foo = function () { };
     var arr = [1, 324];
     var str = 'adfa'
 
@@ -47,7 +68,7 @@
 
     // 方法二  用 getPrototypeOf()
     function instance_of2(left, right) {
-        let rightProto = right.prototype; 
+        let rightProto = right.prototype;
         let leftPro = Object.getPrototypeOf(left); // 注意这个left的变量，这有个坑。。。
         while (true) {
             if (leftPro === null) {
@@ -59,8 +80,8 @@
             leftPro = Object.getPrototypeOf(leftPro) // 这里的leftPro是上面重新定义的原型
         }
     }
-    console.log(instance_of2(foo,Number));
-    
+    console.log(instance_of2(foo, Number));
+
 </script>
 
 </html>
