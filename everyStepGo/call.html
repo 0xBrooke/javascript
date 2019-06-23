@@ -19,6 +19,9 @@
         <li>
             <a href="https://www.runoob.com/w3cnote/js-call-apply-bind.html">区别详解</a>
         </li>
+        <li>
+            <a href="https://www.cnblogs.com/donghezi/p/9742778.html" target="_blank">call的实现 </a>
+        </li>
     </ul>
 </body>
 <script>
@@ -60,21 +63,34 @@
     console.log(mul.call('aa', 2, 3))
     console.log(mul.call(37, 2, 3))
     console.log(mul.call('', 2, 3));
-
+    console.log(mul.call([], 2, 3));
     // bind 的实现
-    Function.prototype._bind = function (fn,context) {
+    Function.prototype._bind = function (fn, context) {
         var self = this;
         return function () {
             return self.apply(fn, context)
         }
     }
+    // 通过柯里化实现的方式
+    Function.prototype._bind1 = function (fn) {
+        var self = this;
+        var args = Array.prototype.slice.call(arguments, 1);
+        console.log("up", args);
+        return function () {
+            var newArgs = args.concat(Array.prototype.slice.call(arguments));
+            console.log("new",newArgs);
+            return self.apply(fn, newArgs);
+        }
+    }
+
     var bindPerson = {
         name: "bindPerson"
     }
     function getName(age) {
-        console.log(this.name+":"+ age)
+        console.log(this.name + ":" + age)
     }
-    getName._bind(bindPerson,[323,43])()
+    getName._bind(bindPerson, [323, 43])();
+    getName._bind1(bindPerson, [188, 43])()
 </script>
 
 </html>
