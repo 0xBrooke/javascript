@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的测试</title>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body>
+    <div>
+        test
+    </div>
+
+    <script>
+        let arr = [2, 5, 6, 4, 9];
+        function func(arr, target) {
+            var obj = {};
+            for (var i = 0; i < arr.length; i++) {
+                var item = arr[i];
+                if (obj[item] === undefined) {
+                    var x = target - item;
+                    obj[x] = i;
+                } else {
+                    return [obj[item], i]
+                }
+            }
+            return null
+        }
+        console.log(func(arr, 14))
+
+    </script>
+</body>
+
+</html>
