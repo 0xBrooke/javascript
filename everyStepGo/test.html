@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    const number = (a, ...b) => [a, b];
+    console.log(number(1, 2, 3, 4, 5));
+    let a = "b";
+    let c = {
+        [a]: "d"
+    }
+    console.log(c);
+    var target = { a: { b: "c", d: "e" } };
+    var source = { a: { b: "hello" } }
+    Object.assign(target, source);
+    console.log(target);
+
+    var str = 5;
+    function f() {
+        console.log(str)  // undefind
+        var str = 10;
+        console.log(str) // 10
+    }
+    f();
+    let myMap = new Map().set("yes", true).set("no", false);
+    console.log(myMap)
+</script>
+
+</html>
