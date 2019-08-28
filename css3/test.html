@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="buy">
+        <span>值得买</span>
+
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .buy {
+        position: relative;
+    }
+
+    .buy span {
+        width: 70px;
+        height: 30px;
+        line-height: 30px;
+        background: #eee;
+        color: red;
+        position: absolute;
+        top: -10%;
+        left: 0;
+        border-radius: 4px;
+        font-size: 12px;
+        text-align: center;
+        /* animation: shake 2s infinite alternate; */
+        animation: shake 3s infinite  alternate;
+    }
+
+    @keyframes shake {
+        from{
+            top:0;
+        }
+        to{
+            top:400px
+        }
+    }
+</style>
+<script>
+
+
+
+</script>
+
+</html>
