@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提示框</title>
+</head>
+
+<body>
+    <button type="button" onclick="prompt(true)">显示</button>
+    <!-- 提示信息 -->
+    <div class="prompt none" id="prompt">
+        <span>操作成功！</span>
+    </div>
+
+    <button type="button" onclick="model(true)">模态框</button>
+    <!-- 模态框 -->
+    <div class="model none" id="model">
+         <main class="main">
+             <p class="title">title</p>
+             <ul>
+                 <li>adsfsfafa都是反复</li>
+                 <li>adsfsfafa都是反复aaafda</li>
+                 <li>adsfsfafa都是反aadfsdf复</li>
+             </ul>
+         </main>
+    </div>
+
+</body>
+
+
+<style>
+    .prompt {
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        max-width: 80%;
+        min-width: 80px;
+        width: 100px;
+        font-size: 14px;
+        border-radius: 3px;
+        padding: 6px 10px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .none {
+        display: none;
+    }
+
+    .prompt.findIn {
+        opacity: 1;
+        animation: findIn 0.5s;
+    }
+
+    .prompt.findOut {
+        opacity: 0;
+        animation: findOut 1s;
+    }
+    @keyframes findIn {
+        0% {
+            opacity: 0;
+        }
+
+        60% {
+            opacity: 0.6;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes findOut {
+        0% {
+            opacity: 1;
+        }
+        60% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    /* 模态框 */
+    .model{
+        position: fixed;
+        left: 50%;
+        top:50%;
+        width: 60%;
+        padding: 10px;
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.8);
+        transform: translate(-50%,-50%);
+    }
+    .model.FindIn{
+        animation: modelFindIn 0.5s
+    }
+    .model.FindOut{
+        animation: modelFindOut 0.5s;
+    }
+    @keyframes modelFindIn {
+        0%{
+            top:0%;
+            opacity: 0;
+        }
+        100%{
+            top:50%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes modelFindOut {
+        0%{
+            top:50%;
+            opacity: 1;
+        }
+        100%{
+            top:0%;
+            opacity: 0;
+        }
+    }
+</style>
+<script>
+    // 提示框
+    function prompt(isShow) {
+        ele = document.getElementById("prompt");
+        ele.className = "prompt " + "findIn";
+        var animation = function () {
+            ele.className = "prompt " + "findOut";
+        };
+        setTimeout(animation, 1000);
+    }
+
+    // 模态框
+    function model(show){
+        var animationClass = show ? "FindIn" : "FindOut";
+        var animation = function () {
+            ele = document.getElementById("model");
+            ele.className = "model " + animationClass;
+            
+        };
+
+        setTimeout(animation, 100);
+    }
+
+</script>
+
+</html>
