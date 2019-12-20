@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>题</title>
+  </head>
+  <body>
+    <div>
+      <p>测试</p>
+      <a href="https://blog.csdn.net/weixin_44138611/article/details/89139475"
+        >参考链接</a
+      >
+    </div>
+  </body>
+  <script>
+    var name = "张三";
+    function handleFun(name, age) {
+      var name = "李四";
+      var message = prologue + name + "!";
+      var prologue = "你好";
+      for (var i = 0; i < 10; i++) {
+        var next = prologue + "你的id是" + i * 2 + i;
+      }
+      console.log(arguments[0]);
+      console.log(arguments[1]);
+      console.log(message);
+      console.log(next);
+    }
+    handleFun("王五");
+    // 题二
+    var newArr = ["1", "2", "3"].map(parseInt);
+    console.log(newArr);
+  </script>
+</html>
