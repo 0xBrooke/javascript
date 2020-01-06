@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Proxy</title>
+  </head>
+  <body></body>
+  <script>
+    var proxy = new Proxy(
+      {},
+      {
+        get: function() {
+          console.log("劫持get方法");
+        },
+        set: function() {
+          console.log("劫持set方法");
+        }
+      }
+    );
+    let obj = Object.create(proxy);
+    obj.age = "28";
+  </script>
+</html>
