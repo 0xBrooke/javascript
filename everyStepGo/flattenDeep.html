@@ -2,72 +2,74 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>flattenDeep函数</title>
-    <link rel="stylesheet" href="../css/common.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flattenDeep函数</title>
+  <link rel="stylesheet" href="../css/common.css">
 </head>
 
 <body>
-    <div>
-        flattenDeep是将数组展平；
-    </div>
-    <ul>
-        <li>
-            <a href="https://www.jianshu.com/p/d46abfa4ddc9" target="_blank">lodash的了解</a>
-        </li>
-        <li>
-            <a href="https://blog.csdn.net/original_heart/article/details/78906911">用法/理解</a>
-        </li>
-        <li>
-            ES6中的flat() 函数
-        </li>
-    </ul>
-    <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
-    <script>
-        var arr1 = [1, [2, 3], [4, [7, 9]], { name: "kk", age: [23, 32] }];
-        var arr2 = _.flatten(arr1);
-        var arr3 = _.flattenDeep(arr1);  // 
-        console.log(arr2)
-        console.log("arr3", arr3);
-        // 一 递归方法
-        function _flattenDeep(arr) {
-            var newArr = [];
-            if (Array.isArray(arr)) {
-                arr.forEach(item => {
-                    Array.isArray(item) ? newArr = newArr.concat(_flattenDeep(item)) : newArr.push(item);
-                })
-            } else {
-                return "false"
-            }
-            return newArr;
-        }
-        console.log(_flattenDeep(arr1));
+  <div>
+    flattenDeep是将数组展平；
+  </div>
+  <ul>
+    <li>
+      <a href="https://www.jianshu.com/p/d46abfa4ddc9" target="_blank">lodash的了解</a>
+    </li>
+    <li>
+      <a href="https://blog.csdn.net/original_heart/article/details/78906911">用法/理解</a>
+    </li>
+    <li>
+      ES6中的flat() 函数
+    </li>
+  </ul>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+  <script>
+    var arr1 = [1, [2, 3], [4, [7, 9, [5, 88, 9999]]], { name: "kk", age: [23, 32] }];
+    var arr2 = _.flatten(arr1); //只减少一个维度；
+    var arr3 = _.flattenDeep(arr1);  // 
+    console.log(arr2)
+    console.log("arr3", arr3);
+    // 一 递归方法
+    function _flattenDeep(arr) {
+      var newArr = [];
+      if (Array.isArray(arr)) {
+        arr.forEach(item => {
+          Array.isArray(item) ? newArr = newArr.concat(_flattenDeep(item)) : newArr.push(item);
+        })
+      } else {
+        return "false"
+      }
+      return newArr;
+    }
+    console.log("递归", _flattenDeep(arr1));
 
 
-        //方法二 Array.prototype.flat
-        function flattenDeep(arr, deepLength) {
-            return arr.flat(deepLength);
+    //方法二 Array.prototype.flat
+    function flattenDeep(arr, deepLength) {
+      return arr.flat(deepLength);
+    }
+    console.log("flat", flattenDeep(arr1, 3));
+    // Infinity 参数：不管是几维数组，都会变成一维数组
+    console.log("flat Infinity", flattenDeep(arr1, Infinity));
+    //方法三 ... 遍历展开
+    function _forKZ(arr) {
+      var stack = [...arr];
+      var res = []; // push的对象
+      while (stack.length) { // 注意，这个循环得巧，但要用好，否则会死循环，
+        var next = stack.pop(); // 从数组的最后一个依次取出每一项；
+        if (Array.isArray(next)) {
+          stack.push(...next);
+        } else {
+          res.push(next);
         }
-        console.log(flattenDeep(arr1, 3));
+      }
+      return res.reverse();
+    }
+    console.log("_forKZ", _forKZ(arr1));
 
-        //方法三 ... 遍历展开
-        function _forKZ(arr) {
-            var stack = [...arr];
-            var res = []; // push的对象
-            while (stack.length) { // 注意，这个循环得巧，但要用好，否则会死循环，
-                var next = stack.pop(); // 从数组的最后一个依次取出每一项；
-                if (Array.isArray(next)) {
-                    stack.push(...next);
-                } else {
-                    res.push(next);
-                }
-            }
-            return res.reverse();
-        }
-        console.log("_forKZ",_forKZ(arr1))
-    </script>
+  </script>
 </body>
 
 </html>
