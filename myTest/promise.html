@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    promise 的理解
+
+</body>
+<script>
+    let fn = function (age) {
+        new Promise(function (resolve, reject) {
+            if (typeof age == "number") {
+                resolve();
+            } else {
+                reject()
+            }
+        }).then(function () {
+            console.log("number");
+
+        }, function () {
+            console.log("string");
+
+        })
+    }
+
+    fn(22);
+    fn("23")
+
+
+    let test1 = function (num) {
+        return new Promise(function (res, rej) {
+            if (typeof num == 'number') {
+                res(num)
+            } else {
+                rej("TypeError")
+            }
+        })
+    };
+
+    test1(5)
+        .then(function (num) {
+            console.log("first", num);
+            return num + 1;
+
+        })
+        .then(function (num) {
+            console.log("second", num);
+            return num + 1;
+        })
+        .then(function (num) {
+            console.log("third", num);
+            return num + 1;
+        });
+
+        // 讲解二
+        
+</script>
+
+</html>
