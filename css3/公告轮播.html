@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  ul, li {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.container {
+  display: inline-block;
+  background: #efefef;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-family: "Microsoft YaHei";
+}
+.container .li-box {
+  height: 28px;
+  overflow: hidden;
+}
+.container ul {
+  position: relative;
+  animation: moveUp 8s 0.6s infinite;
+  -webkit-animation: moveUp 8s 0.6s infinite;
+}
+@keyframes moveUp {
+  0% {
+    top: 0px;
+  }
+  18% {
+    top: 0px;
+  }
+  20% {
+    top: -28px;
+  }
+  38% {
+    top: -28px;
+  }
+  40% {
+    top: -56px;
+  }
+  58% {
+    top: -56px;
+  }
+  60% {
+    top: -84px;
+  }
+  78% {
+    top: -84px;
+  }
+  80% {
+    top: -112px;
+  }
+  98% {
+    top: -112px;
+  }
+}
+.container li {
+  line-height: 1.8;
+  color: #666;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="li-box">
+      <ul>
+        <li>1、本站的url地址是www.softwhy.com</li>
+        <li>2、只有努力奋斗才会有美好的未来</li>
+        <li>3、每一天都是新的必须要好好珍惜。</li>
+        <li>4、当下的时间才是最宝贵的，下一秒都是虚幻</li>
+        <li>5、欢迎提供有益的建议和意见。</li>
+        <li>6.蚂蚁部落位于青岛市南区</li>
+        <li>7、蚂蚁部落位于青岛市南区</li>
+        <li>8、蚂蚁部落位于青岛市南区</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
