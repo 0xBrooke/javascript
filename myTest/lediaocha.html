@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问卷</title></title>
+</head>
+<body>
+  <div class="question-answer" style="display: none;">
+    <ul class="answer-multiple">
+      <li class="ui-checkbox">
+        <input type="checkbox" data-code="1">
+        <label>http://static.jisiba.com/special/20200714/lankou-thumb.jpg,http://static.jisiba.com/special/20200714/lankou.jpg,兰蔻,200</label>
+      </li>
+      <li class="ui-checkbox">
+        <input type="checkbox" data-code="2">
+        <label>http://static.jisiba.com/special/20200714/ordinary-thumb.jpg,http://static.jisiba.com/special/20200714/ordinary.jpg,茶多酚,300</label>
+      </li>
+      <li class="ui-checkbox">
+        <input type="checkbox" data-code="3">
+        <label>http://static.jisiba.com/special/20200714/oulaiya-thumb.jpg,http://static.jisiba.com/special/20200714/oulaiya.jpg,欧莱雅,340</label>
+      </li>
+      <li class="ui-checkbox">
+        <input type="checkbox" data-code="3">
+        <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,雅诗兰黛,440</label>
+      </li>
+      <li class="ui-checkbox">
+        <input type="checkbox" data-code="3">
+        <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,雅诗兰黛,440</label>
+      </li>
+    </ul>
+  </div>
+  <div class="commodityList">
+    <div class="question-answer">
+      <ul class="answer-multiple">
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="1">
+          <label>http://static.jisiba.com/special/20200714/lankou-thumb.jpg,http://static.jisiba.com/special/20200714/lankou.jpg,兰蔻,200</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="2">
+          <label>http://static.jisiba.com/special/20200714/ordinary-thumb.jpg,http://static.jisiba.com/special/20200714/ordinary.jpg,茶多酚,300</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="3">
+          <label>http://static.jisiba.com/special/20200714/oulaiya-thumb.jpg,http://static.jisiba.com/special/20200714/oulaiya.jpg,欧莱雅,340</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="3">
+          <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,雅诗兰黛,440</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="3">
+          <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,雅诗兰黛,440</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script>
+  $(function(){
+    var dataList = []
+    $.each($(".question-answer .ui-checkbox"), function(i,v){
+      console.log($(this).children('input').attr('data-code'))
+      var itemVal =  $(this).children('label').eq(0).text()
+      var itemArr =itemVal.split(',')
+      var itemObj = {
+        url:itemArr[0],
+        bigUrl:itemArr[1],
+        title:itemArr[2],
+        price:itemArr[3]
+      }
+      dataList.push(itemObj)
+    })
+    console.log("sds",dataList)
+  })
+</script>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+</style>

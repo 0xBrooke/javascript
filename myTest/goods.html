@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表</title>
+</head>
+<body>
+  <div class="header">
+    <span class="count-down"></span>
+    <img class="cart" src="http://static.jisiba.com/special/20200714/gouwuche.png" alt="" >
+  </div>
+  <div class="goods-list"></div>
+  <div class="detail"></div>
+  <div class="footer">
+    <span class="back">返回</span>
+    <span class="add-cart">加入购物车</span>
+    <span class="sign-out" onclick="signOut()">退出购物</span>
+  </div>
+  <!-- 第三页 -->
+  <div class="selected-list reset-style">
+    <div class="list">
+
+    </div>
+    <div class="pages-three">
+      <span class="up" onclick="up()">上一页</span>
+      <span class="next" onclick="next()">下一页</span>
+    </div>
+  </div>
+
+  <!-- 数据 -->
+  <div data-code="open" style="display: none;">
+    <div class="question-answer reset-style" >
+      <ul class="answer-multiple">
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="1">
+          <label>http://static.jisiba.com/special/20200714/lankou-thumb.jpg,http://static.jisiba.com/special/20200714/lankou.jpg,兰蔻,200</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="2">
+          <label>http://static.jisiba.com/special/20200714/ordinary-thumb.jpg,http://static.jisiba.com/special/20200714/ordinary.jpg,茶多酚,300</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="3">
+          <label>http://static.jisiba.com/special/20200714/oulaiya-thumb.jpg,http://static.jisiba.com/special/20200714/oulaiya.jpg,欧莱雅,340</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="4">
+          <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,雅诗兰黛,440</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="5">
+          <label>http://static.jisiba.com/special/20200714/olay-thumb.jpg,http://static.jisiba.com/special/20200714/olay.jpg,商品5,500</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div data-code="product">
+    <div class="question-answer" >
+      <ul class="answer-multiple">
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="1">
+          <label>商品1</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="2">
+          <label>商品2</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="3">
+          <label>商品3</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="4">
+          <label>商品4</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="5">
+          <label>商品5</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="checkbox" data-code="6">
+          <label>都不想购买</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <h4>最想买</h4>
+  <div data-code="best">
+    <div class="question-answer" >
+      <ul class="answer-multiple">
+        <li class="ui-checkbox">
+          <input type="radio" data-code="1">
+          <label>商品1</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="radio" data-code="2">
+          <label>商品2</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="radio" data-code="3">
+          <label>商品3</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="radio" data-code="4">
+          <label>商品4</label>
+        </li>
+        <li class="ui-checkbox">
+          <input type="radio" data-code="5">
+          <label>商品5</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="https://static.jisiba.com/special/20200714/layer_mobile/layer.js"></script>
+
+<script>
+  var cartList = []
+  $(function(){
+      var htmlList = ''
+      var bigImgList=''
+      $.each($("div[data-code='open'] .question-answer .ui-checkbox"),function(){
+        var id  = $(this).children('input').attr('data-code');
+        var itemVal =  $(this).children('label').eq(0).text()
+        var v = itemVal.split(',')
+        htmlList+='<div class="goods-item" data-code='+id+'>'
+        htmlList +='<img src="'+v[0]+'" alt="">'
+        htmlList +='<h2 class="title">'+v[2]+'</h2>'
+        htmlList += '<div class="info">'
+        htmlList += '<p class="price">￥'+v[3]+'</p>'
+        htmlList += '</div>'
+        htmlList += '</div>'
+        htmlList += '</div>'
+        bigImgList +='<div class="big-img"><img src="'+v[1]+'" alt=""></div>'
+      })
+      $(".goods-list").html(htmlList);
+      $(".detail").html(bigImgList);
+      // 点击 查看商品详情
+      var index
+      $('.goods-item').click(function(){
+        $('.footer .add-cart').text('加入购物车').css("background","#1B9AEE")
+        index = $(this).index()
+        var itemId = $(this).attr('data-code')
+        $('.detail').find('.big-img').hide()
+        $('.goods-list').hide()
+        $('.detail').find('.big-img').eq(index).show()
+        $('.footer').show()
+        $('.footer .add-cart').attr('data-code',itemId)
+        // 点开过的商品
+        $("div[data-code='open']").find('input[type="checkbox"]').eq(index).prop('checked',true).parent().addClass('checked')
+        if(cartList.length){
+          for(var i=0;i<cartList.length;i++){
+            if(cartList[i][cartList[i].length-1] == itemId){
+              $('.footer .add-cart').text('移除购物车').css("background","#FE4E53")
+            }
+          }
+        }
+      })
+      // 返回
+      $('.footer .back').click(function(){
+        $(".goods-list").show()
+        $('.detail').find('.big-img').hide()
+        $('.footer').hide()
+      })
+      // 点击购物车
+      $('.header .cart').click(function(){
+        if(cartList.length){
+          clearInterval(leaveSetTimeOut)
+          $(".header").hide()
+          $('.detail').css('padding-top','0').find('.big-img').hide()
+          $('.goods-list').hide()
+          $('.footer').hide()
+          $('.selected-list').show()
+          cartData(cartList)
+        }else{
+          layer.open({
+          content: '至少选择一款商品',
+          skin: 'msg',
+          time: 3 
+          });
+        }
+      })
+      // 加入购物车
+      $('.footer .add-cart').click(function(){
+        var text = $(this).text()
+        var id = $(this).attr('data-code')
+        if(text == '加入购物车'){
+          $(this).text('移除购物车').css("background","#FE4E53")
+          var itemVal =  $("div[data-code='open'] .question-answer .ui-checkbox").children('label').eq(index).text()
+          var itemArr = itemVal.split(',')
+          itemArr.push(id)
+          cartList.push(itemArr)
+          // 购物车中 选中题
+          $("div[data-code='product']").find('input[type="checkbox"][data-code='+id+']').prop('checked',true).parent().addClass('checked')
+        }else{
+          $(this).text('加入购物车').css("background","#1B9AEE")
+          for(var i=0;i<cartList.length;i++){
+            if(cartList[i][cartList[i].length-1] == id){
+              cartList.splice(i,1);
+            }
+          }
+          $("div[data-code='product']").find('input[type="checkbox"][data-code='+id+']').prop('checked',false).parent().removeClass('checked')
+        }
+      })
+      // 离开页面 倒计时
+      setTimeout(function(){
+        $('.count-down').show()
+        sendCode('.count-down')
+      },60000*1)
+      // 退出按钮的倒计时
+      setTimeout(function(){
+        $('.footer .sign-out').show()
+      },60000*1)
+  })
+
+  var countdown=120;
+  var leaveSetTimeOut 
+  function sendCode(obj) {
+    if (countdown == 0) {
+      countdown = 120;
+      // 看购物车是否有数据
+      if(cartList.length){
+        $("header").hide()
+        $('.detail').css('padding-top','0').find('.big-img').hide()
+        $('.goods-list').hide()
+        cartData(cartList)
+      }else{
+        $("div[data-code='product']").find('input[type="checkbox"]:last').prop('checked',true).parent().addClass('checked')
+        // 提交
+        Answer.next($('#page').val(),$('#no').val());
+      }
+      return;
+    } else {
+      countdown--;
+      $(obj).html(countdown +' s');
+    }
+    leaveSetTimeOut =  setTimeout(function() {sendCode(obj) },1000)
+  }
+  function cartData(cartList){
+    var cartHtml = ''
+    $.each(cartList,function(i,itme){
+      cartHtml +='<ul class="answer-single best-list">'
+      cartHtml +='<li class="ui-checkbox" onclick="checkBest('+itme[4]+')">'
+      cartHtml +='<input type="radio" name="sex">'
+      cartHtml +='<img src='+itme[0]+' alt="">'
+      cartHtml +='<span class="del" data-code='+itme[4]+' onclick="delItme('+itme[4]+')">移除</span>'
+      cartHtml +='</li>'
+      cartHtml +='</ul>'
+    })
+    $('.selected-list .list').html(cartHtml)
+    $('.selected-list').show()
+  }
+  // 退出购物
+  function signOut(){
+    clearInterval(leaveSetTimeOut)
+    if(cartList.length){
+      $(".header").hide()
+      $('.detail').css('padding-top','0').find('.big-img').hide()
+      $('.goods-list').hide()
+      cartData(cartList)
+    }else{
+      $("div[data-code='product']").find('input[type="checkbox"]:last').prop('checked',true).parent().addClass('checked')
+      // 提交
+      Answer.next($('#page').val(),$('#no').val());
+    }
+  }
+  // 选择最喜欢的
+  function checkBest(id){
+    $('.selected-list').find('li').removeClass('checked')
+    $("div[data-code='best']").find('input[type="radio"]').prop('checked',false).parent().removeClass('checked')
+    $("div[data-code='best']").find('input[type="radio"][data-code='+id+']').prop('checked',true).parent().addClass('checked')
+  }
+  // 删除操作
+  function delItme(id){
+    for(var i=0;i<cartList.length;i++){
+      if(cartList[i][cartList[i].length-1] == id){
+        cartList.splice(i,1);
+      }
+    }
+    $('.best-list').find('span[data-code='+id+']').parent('.ui-checkbox').remove();
+    $("div[data-code='product']").find('input[type="checkbox"][data-code='+id+']').prop('checked',false).parent().removeClass('checked')
+    $("div[data-code='best']").find('input[type="radio"][data-code='+id+']').prop('checked',false).parent().removeClass('checked')
+    var ev = window.event;
+    ev.stopPropagation()
+  }
+  // 上一页
+  function up(){
+    $('.detail').find('.big-img').hide()
+    $('.selected-list').hide()
+    $('.footer').hide()
+    $(".header").show()
+    $('.goods-list').show()
+  }
+  // 下一步
+  function next(){
+    // 判断购物车中是否还有 数据
+    if(cartList.length){
+      var val = $("div[data-code='best']").find('li.checked').attr('class')
+      console.log("dd",val)
+      if(val){
+        Answer.next($('#page').val(),$('#no').val());
+      }else{
+        layer.open({
+          content: '至少选择一款商品',
+          skin: 'msg',
+          time: 3 
+        });
+      }
+    }else{
+      layer.open({
+        content: '请返回上一页，选择商品',
+        skin: 'msg',
+        time: 3 
+      });
+    }
+  }
+</script>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .question{padding: 0;}
+  .ldc-theme{background-color: #fff;}
+  .header{
+    width: 100%;
+    height: 45px;
+    line-height: 35px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #fff;
+    position: fixed;
+    top:0px;
+    z-index: 11;
+  }
+  .header .cart{
+    width: 30px;
+    height: 30px;
+    float: right;
+  }
+  .header .count-down{
+    display: none;
+    padding: 4px 10px;
+    border-radius: 30px;
+    background-color: rgba(0,0,0,0.4);
+    color: #fff;
+  }
+  .goods-list{
+    padding: 7px;
+    background-color: #fff;
+    margin: auto;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 45px;
+  }
+  .goods-item{
+    width:49%;
+    border:1px solid #e6e6e6;
+    border-radius: 5px;
+    margin:4px 0;
+    /* 这里是防止高度不一致导致下方出现空白 */
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* 这里是防止一开始图片没有加载的时候会挤在一块了 */
+    min-height: 240px
+  }
+  .goods-item>img{width:100%}
+  .goods-item>h2{
+    font-size:14px;
+    padding:5px;
+    color: #666;
+    }
+  .info>p{padding:5px}
+  .price{
+    font-size: 16px;
+    color:rgba(238, 56, 56, 0.904);
+    font-weight: bold
+  }
+  .detail{
+    padding-top: 50px;
+  }
+  .detail .big-img{
+    display: none;
+  }
+  .detail img{width: 100%;margin-bottom: 50px;}
+  .footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    line-height: 50px;
+    background: #fff;
+    display: none;
+    z-index: 11;
+  }
+  .footer>span{
+    padding: 5px 8px;
+    background:#1B9AEE;
+    color: #fff;
+    border-radius: 5px;
+    margin-left: 10%;
+    font-size: 14px;
+  }
+  .footer .sign-out{
+    display: none;
+  }
+  /* 第三页 */
+  .selected-list{
+    display: none;
+    padding: 5px 10px;
+  }
+  .selected-list li{
+    display: flex;
+  }
+  .selected-list img{
+    width: 180px;
+    height: 180px;
+    margin-left: 40px;
+  }
+  .selected-list .del{
+    align-self:flex-end;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #FE4E53;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 30px;
+  }
+  .pages-three{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  .pages-three span{
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  .pages-three .up{
+    border: 1px solid #e6e6e6;
+  }
+  .pages-three .next{
+    background: #1B9AEE;
+    color: #fff;
+  }
+  .reset-style ul{
+    border: none;
+    padding: 6px 0;
+  }
+</style>
