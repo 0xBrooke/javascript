@@ -34,23 +34,23 @@
       <ul class="answer-multiple">
         <li class="ui-checkbox">
           <input type="checkbox" data-code="1">
-          <label>http://static.jisiba.com/special/20200714/lankou-thumb.jpg,http://static.jisiba.com/special/20200714/lankou.jpg,兰蔻,200</label>
+          <label>http://static.jisiba.com/special/20200714/lankou-thumb.jpg,http://static.jisiba.com/special/20200714/lankou.jpg,Olay菁纯青春眼精华,200</label>
         </li>
         <li class="ui-checkbox">
           <input type="checkbox" data-code="2">
-          <label>http://static.jisiba.com/special/20200714/ordinary-thumb.jpg,http://static.jisiba.com/special/20200714/ordinary.jpg,茶多酚,300</label>
+          <label>http://static.jisiba.com/special/20200714/ordinary-thumb.jpg,http://static.jisiba.com/special/20200714/ordinary.jpg,雅诗兰黛小棕瓶眼精华,300</label>
         </li>
         <li class="ui-checkbox">
           <input type="checkbox" data-code="3">
-          <label>http://static.jisiba.com/special/20200714/oulaiya-thumb.jpg,http://static.jisiba.com/special/20200714/oulaiya.jpg,欧莱雅,340</label>
+          <label>http://static.jisiba.com/special/20200714/oulaiya-thumb.jpg,http://static.jisiba.com/special/20200714/oulaiya.jpg,兰蔻小黑瓶眼部肌底精华液,340</label>
         </li>
         <li class="ui-checkbox">
           <input type="checkbox" data-code="4">
-          <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,雅诗兰黛,440</label>
+          <label>http://static.jisiba.com/special/20200714/yashilandai-thumb.jpg,http://static.jisiba.com/special/20200714/yashilandai.jpg,欧莱雅青春密码酵素精华眼霜,440</label>
         </li>
         <li class="ui-checkbox">
           <input type="checkbox" data-code="5">
-          <label>http://static.jisiba.com/special/20200714/olay-thumb.jpg,http://static.jisiba.com/special/20200714/olay.jpg,商品5,500</label>
+          <label>http://static.jisiba.com/special/20200714/olay-thumb.jpg,http://static.jisiba.com/special/20200714/olay.jpg,the ordinary5％咖啡因眼部精华液 ,500</label>
         </li>
       </ul>
     </div>
@@ -205,15 +205,17 @@
           $("div[data-code='product']").find('input[type="checkbox"][data-code='+id+']').prop('checked',false).parent().removeClass('checked')
         }
       })
+      var signOutTime = '${q://quitTime/Text/TextEntryValue}'
+      var startTiem = '${q://startTime/Text/TextEntryValue}'
       // 离开页面 倒计时
       setTimeout(function(){
         $('.count-down').show()
         sendCode('.count-down')
-      },60000*1)
+      },60000*Number(startTiem))
       // 退出按钮的倒计时
       setTimeout(function(){
         $('.footer .sign-out').show()
-      },60000*1)
+      },60000*Number(signOutTime))
   })
 
   var countdown=120;
