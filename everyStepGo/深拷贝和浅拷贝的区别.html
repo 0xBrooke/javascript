@@ -182,6 +182,13 @@
     }
     let obj22 = deepCloneJ(obj11);
     obj22.style()
+
+    // 2020/8/20
+    let fun1 = function(){
+      console.log("我是函数 fun1")
+    }
+    const obj33 = deepCloneJ(fun1)
+    obj33()
 </script>
 
 </html>

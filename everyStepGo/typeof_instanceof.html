@@ -38,8 +38,11 @@
             Symbol > function
         </li>
     </ol>
+    <h4>
+      需要注意的是，对于 typeof, 可以正确判断除了null、symbol 之外的所有基本类型，而对于引用类型，除了函数外其他都会被判断为object。
+      <p>对于instanceof,无法判断基本类型，但可以正确判断引用类型</p>
+    </h4>
     <div>
-
     </div>
 
 </body>

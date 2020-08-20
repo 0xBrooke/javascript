@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>垂直居中</title>
+</head>
+<body>
+  <!-- position -->
+  <div class="box1">
+    <div class="juzhong1"></div>
+  </div>
+  <div class="box2">
+    <div class="juzhong2"></div>
+  </div>
+  <div class="box3">
+    <div class="juzhong3"></div>
+  </div>
+  <div class="box4">
+    <div class="juzhong4"></div>
+  </div>
+</body>
+</html>
+<style>
+  .box1,.box2,.box3{
+    width: 300px;
+    height: 200px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    position: relative;
+    float: left;
+  }
+  .juzhong1{
+    width: 100px;
+    height: 50px;
+    background: #ef2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -50px;
+  }
+  .juzhong2{
+    width: 100px;
+    height: 60px;
+    background: #ef2;
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .juzhong3{
+    width: 100px;
+    height: 60px;
+    background: #ef2;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .box4{
+    width: 300px;
+    height: 200px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .juzhong4{
+    width: 100px;
+    height: 60px;
+    background: #ef2;
+  }
+</style>
