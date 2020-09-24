@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>双向数据绑定</title>
+  <style>
+    #app input {
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type='text' id='inp'></input>
+  </div>
+  <div id='box'></div>
+
+</body>
+<script>
+  let obj = {}
+  let oInp = document.getElementById("inp");
+  let obox = document.getElementById('box');
+  Object.defineProperty(obj, 'name', {
+    configurable: true,
+    enumerable: true,
+    get: function () {
+      console.log("get")
+      return val
+    },
+    set: function (newVal) {
+      console.log("set")
+      oInp.value = newVal;
+      obox.innerHTML = newVal
+    }
+  })
+  window.addEventListener('input', function (e) {
+    console.log("222")
+    obj.name = e.target.value
+  })
+  obj.name = '夏文科';
+</script>
+
+</html>

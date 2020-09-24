@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this</title>
+</head>
+
+<body>
+  <div id="app">
+    sadff
+  </div>
+
+  <script>
+    let obj = {
+      age: 18,
+      foo: function (func) {
+        console.log(this.age)
+        func()
+      }
+    }
+    var age = 10
+    function func() {
+      console.log(this.age)
+    }
+    obj.foo(func)
+    console.log("======")
+
+    let obj1 = {
+      age: 20,
+      foo: (func) => {
+        console.log(this.age)
+        func()
+      }
+    }
+    var age = 19
+    function func1() {
+      console.log(this.age)
+    }
+    obj1.foo(func1)
+  </script>
+</body>
+
+</html>
