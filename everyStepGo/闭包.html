@@ -62,7 +62,6 @@
             })(i)
         }
     }
-
     var a = []
     for (var i = 0; i < 10; i++) {
         a[i] = (function (j) {
@@ -75,66 +74,19 @@
     a[6]();
     console.log(a);
 
-
-    // 闭包
-    var name = "keke"
-    var obj1 = {
-        name: "xia",
-        getName1: function () {
-            return this.name;
-        },
-        getName2: function () {
-            return function () {
-                return this.name
-            }
-        }
+    // for(var kk=0;kk<5;kk++){
+    //     (function (o){
+    //         console.log("ddd",o)
+    //        setTimeout(function(){
+    //            console.log(o)
+    //       },1000*o)
+    //     })(kk)
+    // }
+    for(var b=0;b<10;b++){
+        (function(i){
+          console.log(i)
+        })(b)
     }
-    console.log(obj1.getName1())
-    console.log(obj1.getName2()())
-
-    //  作用案例 ：私有变量
-
-    // 此时的Person1里面只有两个方法,
-    // 如果想通过Person1访问money是访问不到的，
-    // 如果你想通过方法调用来访问(Person.makeMoney.money)
-    // 就会返回（Uncaught TypeError: Cannot read property 'money' of undefined at<anonymous>: 1: 14）不能获取
-    // 但是Person可以操作它，但是别人不可以访问
-    function Person1() {
-        var money = 100;
-        this.makeMoney = function () {
-            return ++money;
-        }
-        this.offer = function () {
-            return --money;
-        }
-        return this;
-    }
-    var person1 = new Person1();
-    console.log(person1.makeMoney()) //101
-    console.log(person1.makeMoney()) //102
-    console.log(person1.makeMoney()) //103
-    console.log(person1.offer()) //102
-
-    // 作用案例 ：实现模块化
-    console.log("实现模块化")
-    function Person2() {
-        var money = 50;
-        function makeMoney() {
-            return ++money;
-        }
-        function offer() {
-            return --money;
-        }
-        return {
-            makeMoney:makeMoney,
-            offer:offer
-        };
-    }
-    var person2 = new Person2();
-    console.log(person2.makeMoney()) // 51
-    console.log(person2.makeMoney()) // 52
-    console.log(person2.makeMoney()) // 53
-    console.log(person2.offer()) // 52
 </script>
 
 </html>
