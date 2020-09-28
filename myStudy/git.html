@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git 问题记录</title>
+</head>
+<body>
+  <!-- 记录国美配置ssh的问题 -->
+  <div>
+    <span>国美配置git比较麻烦，用的是Arcanist是Phabricator提交代码评审和管理的客户端工具。前面一路的配置都比较顺利，就是特意记录一下配置ssh公匙，这一步其实也不麻烦，问题是git clone的时候，就是提示没有权限，查找各种问题发现，ssh没有生效，一定要注意，我们用命令生成ssh（ssh-keygen -t rsa -C "email@example.com"）要看一下电脑中是ssh文件夹下，是否有三个文件（id_rsa,id_rsa.pub,known_hosts）,我出现的根本问题就是我没有（known_hosts）文件，一直提示让我去生成，我一直没有生成，哎（英文很重要啊
+      ！！） </span>
+      <p>
+        <a href="https://www.csdn.net/gather_2e/MtjaQg0sNzY3NjgtYmxvZwO0O0OO0O0O.html">解决问题</a>
+      </p>
+      <p><a href="https://blog.csdn.net/JJBOOM425/article/details/108072486">解决问题</a></p>
+  </div>
+</body>
+</html>
