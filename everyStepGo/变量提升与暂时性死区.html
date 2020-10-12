@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>变量提升与暂时性死区</title>
-    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../static/css/common.css">
 </head>
 
 <body>
@@ -36,6 +36,8 @@
     if (true) {
         tmp = 'abc'; // ReferenceError
         let tmp;
+        tmp = '33'
+        console.log(tmp)
     }
 </script>
 
