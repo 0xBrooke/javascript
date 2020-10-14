@@ -23,13 +23,23 @@
         <p>暂时性死区的本质就是，只要一进入当前作用域，所要使用的变量就已经存在了，但是不可获取不可使用，只有等到声明变量的那一行代码出现，才可以获取和使用该变量</p>
         <p>在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”</p>
     </div>
+    <h3>var 、let const的区别</h3>
+    <a href="https://juejin.im/post/6844904131556016142">掘金</a>
+    <ul>
+      <li>1、作用域不同，var是函数作用域，let、const是块级作用域</li>
+      <li>2、var存在变量提升，let、const没有变量提升</li>
+      <li>3、var可以重复定义、let、const不能重复定义</li>
+    </ul>
+    const的特殊之处
+    <p>const是定义常量的，声明时要给一个初始值，切不能修改</p>
+    <a href="https://segmentfault.com/a/1190000021945243">重点（如果const定义的是对象，是可以修改的）</a>
+    <p>重点：const保证的并不是变量的值不动，而是保证变量指向的内存地址（指针）不改动。</p>
 </body>
 <script>
     console.log(typeof a)
     console.log(typeof b)
     let b
     var a;
-
 
     // 重点看一下
     var tmp = 123;

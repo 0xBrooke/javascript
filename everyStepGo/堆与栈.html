@@ -9,7 +9,7 @@
     <title>堆与栈、for循环之间的对比</title>
     <style>
         li {
-            margin-bottom: 10px;
+          margin-bottom: 10px;
         }
     </style>
 </head>
@@ -23,10 +23,9 @@
         </li>
         <li>
             <a href="https://www.cnblogs.com/c2016c/articles/9328725.html"
-                target="_blank">基本数据类型和复杂数据类型的区别（也设计到了堆与栈）</a>
+                target="_blank">基本数据类型和复杂数据类型的区别（也涉及到了堆与栈）</a>
         </li>
     </ul>
-   
     <h3>for循环的相关知识</h3>
     <ul>
         <li>
@@ -39,7 +38,10 @@
     <h3> == === 的区别详解</h3>
     <ul>
         <li><a href="https://blog.csdn.net/magic_xiang/article/details/83686224" target="_blank">CSDN</a></li>
+        <li><a href="https://www.cnblogs.com/weiqinl/p/8380060.html" target="_blank">对象原型上的valueOf()方法</a></li>
+        <li><a href="https://blog.csdn.net/qiang510939237/article/details/88131019" target="_blank">valueOf、和toString 调用的优先级</a></li>
     </ul>
+    <p>知识点：!可将变量转换成boolean类型，null、undefined、NaN以及空字符串('')取反都为true，其余都为false</p>
 </body>
 <!-- 堆与栈 -->
 
@@ -48,9 +50,8 @@
     var b = String("123");  // String
     var c = "123";
     console.log(a == b, a === b, b == c,b===c, a == c,a===c);
-    console.log()
     var d = new String("123");
-    console.log(a == d);
+    console.log("a与d",a == d,a === d);
 
     // console.log(null instanceof Object)
     var person = function () {
@@ -82,7 +83,7 @@
         console.log(item, index, items);
     })
     let arrMap = arr.map((item, index, items) => {
-        return item + "M"
+      return item + "M"
     })
     console.log(arrMap);
 

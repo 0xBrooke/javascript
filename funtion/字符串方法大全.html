@@ -5,24 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>字符串方法大全</title>
-    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../static/css/common.css">
 </head>
 <body>
-    <ol class="col_r">
-        <li>
-            split() 是吧字符串转换成字符串数组，参数则为，以什么符号为标识，来分割
-        </li>
-        <li>
-            
-        </li>
-    </ol>
-    <script>
-        // 
-        var _split = '1,32,34/34,sdf'.split(","); 
-        console.log(_split)
-    
-    
-    
-    </script>
+  <ol class="col_r">
+      <li>
+          split() 是把字符串转换成字符串数组，参数则为，以什么符号为标识，来分割
+      </li>
+      <li>
+        indexOf 既是字符串 String的方法， 也是数组Array 中的方法
+        <a href="https://www.jb51.net/article/94627.htm" target="_blank">indexOf知识点</a>
+        与之类似的方法还有 includes 它的返回值是 true / false,但是在IE中有点不支持所以要注意
+      </li>
+      <li>
+        <a href="https://juejin.im/post/6882887469495402509" target="_blank">掘金JavaScript的知识点</a>
+      </li>
+  </ol>
+  <script>
+    // 
+    var _split = '1,32,34/34,sdf'.split(","); 
+    console.log(_split)
+    // 知识一  如何从数组中删除特定的项
+    // 涉及到的知识点 indexOf 开上面链接
+    function removeItem(){
+      var arr = ['3','rr',55,'re','rr']
+      var index = arr.indexOf('rr')
+      if(index>-1){
+        arr.splice(index,1)
+      }
+      console.log(arr)
+    }
+    removeItem()
+    // 上面的函数只能删除一次，如有重复的相并不能全部删除
+    function removeAll(){
+      var arr = ['3','rr',55,'re','rr']
+      for(let val of arr){
+        if(val === 'rr'){
+          let i = arr.indexOf(val)
+          arr.splice(i,1)
+        }
+      }
+      return arr
+    }
+    console.log(removeAll())
+  </script>
 </body>
 </html>

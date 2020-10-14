@@ -12,9 +12,10 @@
 <body>
     <script>
         var arr = [58, 23, 3, 5, 9, 33, 9, 53, 5, 32, 52, 52, 23, 52, 2, 3,]
-        // 一 es5
+        // 一 es5 indexOf
         function delRepeat(arr) {
             if (Array.isArray(arr)) {
+              // 核心
                 var newArr = []
                 for (let i of arr) {
                     if (newArr.indexOf(i) == -1) {
@@ -32,11 +33,13 @@
         let _set1 = [...new Set(arr)];
         console.log(_set)
         console.log(_set1);
+
         // 三 filter
         let _filter = arr.filter((item, index, data) => {
-            return data.indexOf(item) == index; // indexOf 是核心
+            return data.indexOf(item) === index; // indexOf 是核心
         });
         console.log(_filter);
+
         // 四 reduce
         let _reduce = arr.reduce((data, item) => {
             if (!data.includes(item)) {

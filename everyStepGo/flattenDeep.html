@@ -24,13 +24,8 @@
       ES6中的flat() 函数
     </li>
   </ul>
-  <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
   <script>
     var arr1 = [1, [2, 3], [4, [7, 9, [5, 88, 9999]]], { name: "kk", age: [23, 32] }];
-    var arr2 = _.flatten(arr1); //只减少一个维度；
-    var arr3 = _.flattenDeep(arr1);  // 
-    console.log(arr2)
-    console.log("arr3", arr3);
     // 一 递归方法
     function _flattenDeep(arr) {
       var newArr = [];
@@ -53,6 +48,7 @@
     console.log("flat", flattenDeep(arr1, 3));
     // Infinity 参数：不管是几维数组，都会变成一维数组
     console.log("flat Infinity", flattenDeep(arr1, Infinity));
+
     //方法三 ... 遍历展开
     function _forKZ(arr) {
       var stack = [...arr];
@@ -68,7 +64,11 @@
       return res.reverse();
     }
     console.log("_forKZ", _forKZ(arr1));
-
+    // 四 正则
+    const res2 = JSON.stringify(arr1).replace(/\[|\]/g, '').split(',');
+    console.log('正则',res2)
+    // 五 ：注意这个数组中不能有对象，只是基础数据类型
+    [1, [2, [3, [4, 5]]], 6].toString().split(",").map(Number)
   </script>
 </body>
 

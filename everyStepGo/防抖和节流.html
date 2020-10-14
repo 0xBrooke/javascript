@@ -61,7 +61,7 @@
     </p>
 
 </body>
-<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/jquery-1.11.3.min.js"></script>
 <script>
     //防抖
     // 滚动停止以后执行
@@ -117,6 +117,7 @@
         return function () {
             var context = this;
             var args = arguments;
+            console.log("dfas",timeout)
             if (timeout) {
                 clearTimeout(timeout)
             };
