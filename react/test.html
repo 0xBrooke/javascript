@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+
+  </div>
+  <script src="./lib/react.js"></script>
+  <script src="./lib/react-dom.js"></script>
+  <script src="./lib/browser.min.js"></script>
+  <script type='text/babel'>
+  let names = ['xiawenke','xwk','夏文科'];
+  var HelloComponent = React.createClass({
+    render: function() {
+      return <div>
+        {names.map(function(name){ 
+          return <span key={name}>{name}</span>
+        })}
+        <p>姓名：{this.props.name}</p>
+      </div>
+    }
+  })
+  ReactDOM.render(
+    <HelloComponent name='xiake'/>, document.getElementById('root')
+  )
+  </script>
+</body>
+</html>
