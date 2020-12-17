@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则</title>
+</head>
+<body>
+    <div>
+        <li>
+            <a href="https://www.2cto.com/kf/201402/279929.html">RegExp</a>
+        </li>
+        <p>第一个参数是需要匹配的字符串，第二个参数是模式修饰符，i：在匹配的过程中忽略大小写；g：全局匹配(而不是匹配到一个目标字符串便停下来)；m：多行匹配；</p>
+    </div>
+</body>
+<script>
+    var regExp = new RegExp('box','img');
+    // img 参数同上面的解释
+    var str = "this is a box,that is a box too";
+    var bool = regExp.test(str);
+    console.log(bool);
+</script>
+</html>
