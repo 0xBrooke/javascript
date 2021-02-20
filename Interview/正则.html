@@ -12,6 +12,10 @@
         </li>
         <p>第一个参数是需要匹配的字符串，第二个参数是模式修饰符，i：在匹配的过程中忽略大小写；g：全局匹配(而不是匹配到一个目标字符串便停下来)；m：多行匹配；</p>
     </div>
+    <div>
+        <!-- 只能输入数字和小数点 -->
+        <input type="text" onkeyup="value=value.replace(/[^\d^\.]+/g,'')">
+    </div>
 </body>
 <script>
     var regExp = new RegExp('box','img');

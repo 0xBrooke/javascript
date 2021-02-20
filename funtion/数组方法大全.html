@@ -42,6 +42,15 @@
 
     }
   }
+
+// test
+console.log('test')
+const data = {
+"A": "{'qrCodeContent':'A1f6a5e9f3e29412ab9c92365fcf939d0','qrCodeType':'A','ua':'GMCF-XXMYF'}",
+"B": "{'qrCodeContent':'B1f6a5e9f3e29412ab9c92365fcf939d0','qrCodeType':'B','ua':'GMCF-XXMYF'}"
+}
+console.log()
+console.log(JSON.parse(data.A.replace(/\'/ig,"\"")))
 </script>
 
 </html>
