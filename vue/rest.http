@@ -1,0 +1,8 @@
+POST https://api-admin.cigoadmin.com/v1/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "module": "admin",
+  "password": "123456",
+  "username": "admin",
+}
