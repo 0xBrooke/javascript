@@ -43,13 +43,13 @@
         // 四 reduce
         let _reduce = arr.reduce((data, item) => {
             if (!data.includes(item)) {
-                return data.concat(item)
+                data.push(item)
             } else {
-                return data;
+                data;
             }
-            return data.concat(item)
+            return data
         }, []);
-        console.log(_reduce);
+        console.log('reduce',_reduce);
 
         // 五 sort
         function _sort(arr){

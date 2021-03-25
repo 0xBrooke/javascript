@@ -9,6 +9,52 @@
   
 </body>
 <script>
+    // 统计
+    let myArr = [2,4,5,'a',2,'b',5,2,'a',1,8];
+    let newMyArr = myArr.reduce((prev,next) => {
+        if(prev[next]){
+            prev[next]++
+        }else{
+            prev[next] = 1
+        }
+        return prev
+    },{})
+    console.log(newMyArr);
+    // 筛选、去重
+    let newShaixuan  = myArr.reduce((prev, next)=>{
+        if(!prev[next]){
+            prev.push(next);
+        }
+        return prev
+    },[])
+    console.log("去重",newShaixuan)
+    // 求和
+    let myArrTotal = [1,5,6,4]
+    let newTotle = myArrTotal.reduce((prev, next) => {
+        return prev+next
+    },0)
+    console.log(newTotle)
+    // 降维
+    let myArrFlat = [4,[3,7,4],['aa',6,[44,5,[6,7]]]];
+    let flat1 = myArrFlat.flat(Infinity)
+    console.log(flat1)
+    function flat2 (myArrFlat){
+        return myArrFlat.reduce((prev, next) =>{
+            console.log(prev,next)
+            // return prev.concat(Array.isArray(next)?flat2(next):next);
+            if(Array.isArray(next)){
+                return prev.concat(flat2(next));
+            }else{
+                return prev.concat(next);
+            }
+        },[])
+    }
+    console.log(flat2(myArrFlat))
+    
+
+
+
+
 let person = [
     {id: 3, name: "小明"},
     {id: 1, name: "小张"},
@@ -22,6 +68,7 @@ let peon = person.reduce((cur,next) => {
     obj[next.id] ? "" : obj[next.id] = true && cur.push(next);
     return cur;
 },[]) //设置cur默认类型为数组，并且初始值为空的数组
-console.log('dd',peon)
+// console.log('dd',peon)
+// console.log('cc',obj)
 </script>
 </html>

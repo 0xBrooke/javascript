@@ -51,6 +51,19 @@ const data = {
 }
 console.log()
 console.log(JSON.parse(data.A.replace(/\'/ig,"\"")))
+
+// test
+for (var i = 1; i <= 5; i++) {
+    function aa(i){
+        setTimeout(function timer() {
+            console.log(i);
+       }, i * 1000);
+    }
+    aa(i)
+}
+
+// test
+
 </script>
 
 </html>
