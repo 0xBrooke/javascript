@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    promise
+  </div>
+</body>
+
+</html>
+<script>
+  console.dir(Promise)
+
+
+  // 回调函数
+  function A(callBack) {
+    setTimeout(function () {
+      let info = 5;
+      callBack(info)
+    }, 1000)
+  }
+  function B(res) {
+    console.log('回调函数', res)
+  }
+  A(B)
+  // promist
+  function runAsync() {
+    let p = new Promise((resolve, reject) => {
+      setTimeout(function () {
+        resolve(5)
+      }, 2000)
+    })
+    return p
+  }
+  runAsync().then(resolve => {
+    console.log('Promise', resolve)
+    return totle = 4 + resolve
+  }).then(res => {
+    console.log("then2", res)
+  })
+  // 如果B函数也是一个异步的呢
+  function A_1(callBack, callBackC) {
+    setTimeout(function () {
+      let info = 6;
+      console.log('A_1')
+      callBack(info, callBackC)
+    }, 2000)
+  }
+  function B_1(res, callBack) {
+    setTimeout(function () {
+      let Totle = 1 + res
+      console.log('B_1')
+      callBack(Totle)
+    }, 2500)
+  }
+  function C_1(res) {
+    console.log('回调函数_1', res)
+  }
+  A_1(B_1, C_1)
+
+  function promist1() {
+    return new Promise((resolve, reject) => {
+      setTimeout(function () {
+        resolve('我是promist_1')
+      }, 2000)
+    })
+  }
+  promist1().then(res => {
+    console.log(res)
+    console.log(aa);
+  }).catch(err => {
+    console.log('err')
+  })
+  
+</script>

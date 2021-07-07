@@ -121,7 +121,7 @@
             if (timeout) {
                 clearTimeout(timeout)
             };
-            timeout = setTimeout(function () {
+            timeout = setTimeout(function () { 
                 fn.apply(context, args)
             }, interval)
         }

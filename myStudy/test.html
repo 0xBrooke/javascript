@@ -11,36 +11,36 @@
 
 <body>
   <div id="app">
-    sadff
+    <span type="button" onclick="loop()">开始循环</span>
+    <span type="button" onclick="end()">结束循环</span>
   </div>
 
   <script>
-    let obj = {
-      age: 18,
-      foo: function (func) {
-        console.log(this.age)
-        func()
-      }
+    let i = 0;
+    let timer;
+    let timer1;
+    function loop(){
+      timer = setInterval(function(){
+        console.log("III",i++)
+      },1000)
+      timer1 = setInterval(function(){
+        console.log("二",i++)
+      },1500)
     }
-    var age = 10
-    function func() {
-      console.log(this.age)
+    function end(){
+      console.log("dddd",timer)
+      console.log("dddd",timer1)
+      clearInterval(timer)
+      clearInterval(timer1)
     }
-    obj.foo(func)
-    console.log("======")
 
-    let obj1 = {
-      age: 20,
-      foo: (func) => {
-        console.log(this.age)
-        func()
-      }
-    }
-    var age = 19
-    function func1() {
-      console.log(this.age)
-    }
-    obj1.foo(func1)
+
+    let s1 = new Set(["a",'b','c','d',"a"])
+    console.log("s1", s1)
+    console.log("s1", Object.prototype.toString.call(s1))
+    var arr=[3, 62, 3, 38, 20, 42, 14, 5, 38, 29, 42];
+    console.log((new Set(arr)));
+    console.log(Array.from(new Set(arr)))
   </script>
 </body>
 
